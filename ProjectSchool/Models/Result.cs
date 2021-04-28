@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ProjectSchool.Models
 {
-    public class StudentCourse
+    public class Result
     {
-        public int StudentCourseId { get; set; }
-
+        public int ResultId { get; set; }
         [ForeignKey("Student")]
         public int StudentId { get; set; }
-
-        [ForeignKey("Course")]
-        public int CourseId { get; set; }
+        [ForeignKey("Test")]
+        public int TestId { get; set; }
+        public int Mark { get; set; }
+        public int Grade { get; set; }
     }
 }
