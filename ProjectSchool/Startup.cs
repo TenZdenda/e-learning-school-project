@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProjectSchool.Interface;
+using ProjectSchool.Services.EFServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,9 @@ namespace ProjectSchool
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            //services.AddDbContext<ProjectSchoolDbContextModelSnapshot>();
             services.AddControllersWithViews();
+            services.AddTransient<IAdminService, EFAdminService>();
 
         }
 
