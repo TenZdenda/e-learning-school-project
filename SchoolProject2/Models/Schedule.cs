@@ -8,7 +8,7 @@ namespace SchoolProject2.Models
 {
     public class Schedule
     {
-        public int ScheduleId { get; set; }
+        public int Id { get; set; }
 
         public DateTime Date { get; set; }
 

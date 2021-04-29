@@ -9,10 +9,7 @@ namespace SchoolProject2.Models
 {
     public class Question
     {
-        [Required]
-        [MaxLength(50)]
-        public int QuestionId { get; set; }
-
+        public int Id { get; set; }
 
         public int TestId { get; set; }
         [ForeignKey(nameof(TestId))]
@@ -20,6 +17,6 @@ namespace SchoolProject2.Models
         
         public string TheQuestion { get; set; }
 
-        public string Choice { get; set; }
+        public List<string> Choice { get; set; }
     }
 }

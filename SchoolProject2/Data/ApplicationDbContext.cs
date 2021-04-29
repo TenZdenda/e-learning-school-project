@@ -17,5 +17,6 @@ namespace SchoolProject2.Data
         public DbSet<AdminUser> AdminUsers { get; set; }
         public DbSet<StudentUser> StudentUsers { get; set; }
         public DbSet<TeacherUser> TeacherUsers { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }

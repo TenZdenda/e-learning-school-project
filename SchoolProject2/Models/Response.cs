@@ -8,7 +8,7 @@ namespace SchoolProject2.Models
 {
     public class Response
     {
-        public int ResponseId { get; set; }
+        public int Id { get; set; }
 
         
         public int StudentId { get; set; }

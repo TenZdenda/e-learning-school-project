@@ -13,5 +13,17 @@ namespace SchoolProject2.Models
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [NotMapped] //ignore
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Compare(nameof(Password))]
+        [NotMapped]
+        public string ConfirmPassword { get; set; }
+
+        public virtual ICollection<Course> Courses { get; set; }
     }
 }

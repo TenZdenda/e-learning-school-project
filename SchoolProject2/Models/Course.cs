@@ -8,12 +8,13 @@ namespace SchoolProject2.Models
 {
     public class Course
     {
-        [Required]
-        [MaxLength(50)]
-        public int CourseId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(50)]
         public string CourseName { get; set; }
+
+
+        public virtual ICollection<StudentUser> StudentUsers { get; set; }
     }
 }
