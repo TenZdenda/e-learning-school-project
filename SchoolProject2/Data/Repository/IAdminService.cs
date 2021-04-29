@@ -8,7 +8,7 @@ namespace SchoolProject2.Data.Repository
 {
     public interface IAdminService
     {
-        List<TeacherUser> GetAllTeachers();
-        List<StudentUser> GetAllStudents();
+        IEnumerable<TeacherUser> GetAllTeachers();
+        IEnumerable<StudentUser> GetAllStudents();
     }
 }

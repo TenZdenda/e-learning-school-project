@@ -9,22 +9,20 @@ using SchoolProject2.Models;
 
 namespace SchoolProject2.Areas.Admin.Pages
 {
-    public class CreateStudentModel : PageModel
+    public class AllTeachersModel : PageModel
     {
+
         private readonly IAdminService _db;
-        public StudentUser Student { get; set; }
-        public CreateStudentModel(IAdminService db)
+        public IEnumerable<TeacherUser> Students { get; set; }
+
+        public AllTeachersModel(IAdminService db)
         {
             _db = db;
         }
+
         public void OnGet()
         {
-           
-        }
-
-        public void OnPost()
-        {
-
+            Students = _db.GetAllTeachers();
         }
     }
 }

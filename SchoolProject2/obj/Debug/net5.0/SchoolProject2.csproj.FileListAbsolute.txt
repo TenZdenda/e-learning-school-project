@@ -961,3 +961,11 @@ C:\Users\vladi\Documents\GitHub\e-learning-school-project\SchoolProject2\obj\Deb
 C:\Users\vladi\Documents\GitHub\e-learning-school-project\SchoolProject2\obj\Debug\net5.0\Razor\Areas\Admin\Pages\AllStudents.cshtml.g.cs
 C:\Users\vladi\Documents\GitHub\e-learning-school-project\SchoolProject2\obj\Debug\net5.0\Razor\Areas\Admin\Pages\_ViewImports.cshtml.g.cs
 C:\Users\vladi\Documents\GitHub\e-learning-school-project\SchoolProject2\obj\Debug\net5.0\Razor\Areas\Admin\Pages\CreateStudent.cshtml.g.cs
+C:\Users\vladi\Documents\GitHub\e-learning-school-project\SchoolProject2\obj\Debug\net5.0\Razor\Areas\Student\Pages\_ViewImports.cshtml.g.cs
+C:\Users\vladi\Documents\GitHub\e-learning-school-project\SchoolProject2\obj\Debug\net5.0\Razor\Areas\Student\Pages\_ViewStart.cshtml.g.cs
+C:\Users\vladi\Documents\GitHub\e-learning-school-project\SchoolProject2\obj\Debug\net5.0\Razor\Areas\Student\Shared\_Layout.cshtml.g.cs
+C:\Users\vladi\Documents\GitHub\e-learning-school-project\SchoolProject2\obj\Debug\net5.0\Razor\Areas\Teacher\Pages\_ViewImports.cshtml.g.cs
+C:\Users\vladi\Documents\GitHub\e-learning-school-project\SchoolProject2\obj\Debug\net5.0\Razor\Areas\Teacher\Pages\_ViewStart.cshtml.g.cs
+C:\Users\vladi\Documents\GitHub\e-learning-school-project\SchoolProject2\obj\Debug\net5.0\Razor\Areas\Teacher\Shared\_Layout.cshtml.g.cs
+C:\Users\vladi\Documents\GitHub\e-learning-school-project\SchoolProject2\obj\Debug\net5.0\Razor\Areas\Admin\Pages\AllTeachers.cshtml.g.cs
+C:\Users\vladi\Documents\GitHub\e-learning-school-project\SchoolProject2\obj\Debug\net5.0\Razor\Areas\Admin\Pages\CreateTeacher.cshtml.g.cs

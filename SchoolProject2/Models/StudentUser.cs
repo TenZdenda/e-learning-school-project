@@ -21,7 +21,7 @@ namespace SchoolProject2.Models
 
         [DataType(DataType.Password)]
         [Compare(nameof(Password))]
-        [NotMapped]
+        [NotMapped] //ignore
         public string ConfirmPassword { get; set; }
 
         public virtual ICollection<Course> Courses { get; set; }

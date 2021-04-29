@@ -9,17 +9,17 @@ using SchoolProject2.Models;
 
 namespace SchoolProject2.Areas.Admin.Pages
 {
-    public class CreateStudentModel : PageModel
+    public class CreateTeacherModel : PageModel
     {
         private readonly IAdminService _db;
-        public StudentUser Student { get; set; }
-        public CreateStudentModel(IAdminService db)
+        public TeacherUser Teacher { get; set; }
+        public CreateTeacherModel(IAdminService db)
         {
             _db = db;
         }
         public void OnGet()
         {
-           
+
         }
 
         public void OnPost()

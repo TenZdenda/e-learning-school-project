@@ -9,14 +9,19 @@ namespace SchoolProject2.Data.EFRepository
 {
     public class EFAdminService : IAdminService
     {
-        public List<StudentUser> GetAllStudents()
+        ApplicationDbContext context;
+        public EFAdminService(ApplicationDbContext db)
         {
-            throw new NotImplementedException();
+            context = db;
+        }
+        public IEnumerable<StudentUser> GetAllStudents()
+        {
+            return context.StudentUsers ;
         }
 
-        public List<TeacherUser> GetAllTeachers()
+        public IEnumerable<TeacherUser> GetAllTeachers()
         {
-            throw new NotImplementedException();
+            return context.TeacherUsers;
         }
     }
 }
