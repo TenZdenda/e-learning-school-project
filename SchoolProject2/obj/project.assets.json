@@ -7599,11 +7599,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vladi\\source\\repos\\SchoolProject2\\SchoolProject2\\SchoolProject2.csproj",
+      "projectUniqueName": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2\\SchoolProject2.csproj",
       "projectName": "SchoolProject2",
-      "projectPath": "C:\\Users\\vladi\\source\\repos\\SchoolProject2\\SchoolProject2\\SchoolProject2.csproj",
+      "projectPath": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2\\SchoolProject2.csproj",
       "packagesPath": "C:\\Users\\vladi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vladi\\source\\repos\\SchoolProject2\\SchoolProject2\\obj\\",
+      "outputPath": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

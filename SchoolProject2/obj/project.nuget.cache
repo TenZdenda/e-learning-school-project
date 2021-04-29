@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "teZL+0V+h8GsM1a1JrVftmD/VUiWeugWciZqEGiy75NUCUWb/nobRFneNZl8R7ZjDIKVuy7Y62mddUjJ4sGn2g==",
+  "dgSpecHash": "HPtsgX734R5qUhsSu4VoSmpDUFA45h4fUqMWI4IZHnuUvrRWsk4pHVbonuigy6UErqAaa3xLog25Kyvxo0F0BA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vladi\\source\\repos\\SchoolProject2\\SchoolProject2\\SchoolProject2.csproj",
+  "projectFilePath": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2\\SchoolProject2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vladi\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\vladi\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.4\\microsoft.aspnetcore.cryptography.internal.5.0.4.nupkg.sha512",
