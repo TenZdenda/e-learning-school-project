@@ -1,0 +1,46 @@
+﻿@page
+@model SchoolProject2.Areas.Admin.Pages.CreateTeacherModel
+
+<div class="container">
+    <div class="row mb-2">
+        <div class="col">
+            <h1 class="text-info">Create New Teacher</h1>
+        </div>
+    </div>
+    <form method="post">
+        <div class="row mb-2">
+            <div class="col-2">
+                <label>Name</label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Teacher.Name" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label>Email</label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Teacher.Email" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label>Password</label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Teacher.Password" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label>Confirm password</label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Teacher.ConfirmPassword" class="form-control" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary offset-2">Create</button>
+    </form>
+</div>
