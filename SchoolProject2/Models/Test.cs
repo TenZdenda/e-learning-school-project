@@ -19,13 +19,13 @@ namespace SchoolProject2.Models
         public int NumOfQuestions { get; set; }
 
         
-        public int TeacherId { get; set; }
-        [ForeignKey(nameof(TeacherId))]
-        public virtual TeacherUser TeacherUser { get; set; }
+        //public int TeacherId { get; set; }
+        //[ForeignKey(nameof(TeacherId))]
+        //public virtual TeacherUser TeacherUser { get; set; }
 
-        public int AdminId { get; set; }
-        [ForeignKey(nameof(AdminId))]
-        public virtual AdminUser AdminUser { get; set; }
+        //public int AdminId { get; set; }
+        //[ForeignKey(nameof(AdminId))]
+        //public virtual AdminUser AdminUser { get; set; }
         
     }
 }

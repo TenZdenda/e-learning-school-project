@@ -14,7 +14,6 @@ namespace SchoolProject2.Models
         [MaxLength(50)]
         public string CourseName { get; set; }
 
-
         public virtual ICollection<StudentUser> StudentUsers { get; set; }
     }
 }
