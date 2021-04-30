@@ -10,6 +10,7 @@ namespace SchoolProject2.Data.EFRepository
     public class EFAdminService : IAdminService
     {
         ApplicationDbContext context;
+        public string st;
         public EFAdminService(ApplicationDbContext db)
         {
             context = db;
