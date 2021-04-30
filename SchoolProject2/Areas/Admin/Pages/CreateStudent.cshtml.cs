@@ -12,6 +12,7 @@ namespace SchoolProject2.Areas.Admin.Pages
     public class CreateStudentModel : PageModel
     {
         private readonly IAdminService _db;
+        
         public StudentUser Student { get; set; }
         public CreateStudentModel(IAdminService db)
         {
@@ -19,12 +20,17 @@ namespace SchoolProject2.Areas.Admin.Pages
         }
         public void OnGet()
         {
-           
+            
         }
 
-        public void OnPost()
+        public IActionResult OnPost(StudentUser Student)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            _db.AddStudent(Student);
+            return RedirectToPage("AllStudents");
         }
     }
 }

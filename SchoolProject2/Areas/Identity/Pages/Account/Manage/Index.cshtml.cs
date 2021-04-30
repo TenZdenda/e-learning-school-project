@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using SchoolProject2.Data;
 
 namespace SchoolProject2.Areas.Identity.Pages.Account.Manage
 {
@@ -13,13 +15,16 @@ namespace SchoolProject2.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ApplicationDbContext _db;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            ApplicationDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _db = db;
         }
 
         public string Username { get; set; }
@@ -35,18 +40,32 @@ namespace SchoolProject2.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Required]
+            public string Name { get; set; }
+            public string Email { get; set; }
+            public string AreaCodeAndTown { get; set; }
+            public string RoadNameAndNumber { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //var userName = await _userManager.GetUserNameAsync(user);
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //var email = await _userManager.GetEmailAsync(user);
+            var userFromDb = await _db.Users.FirstOrDefaultAsync(x => x.Email == user.Email);
 
-            Username = userName;
+            Username = userFromDb.UserName;
+
+            
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                Email = userFromDb.Email,
+                PhoneNumber = userFromDb.PhoneNumber,
+                //AreaCodeAndTown = userFromDb.AreaCodeAndTown,
+                Name = userFromDb.UserName,
+                //RoadNameAndNumber = userFromDb.RoadNameAndNumber,
             };
         }
 
@@ -76,16 +95,26 @@ namespace SchoolProject2.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
-            }
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //if (Input.PhoneNumber != phoneNumber)
+            //{
+            //    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            //    if (!setPhoneResult.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set phone number.";
+            //        return RedirectToPage();
+            //    }
+            //}
+
+            var userFromDb = await _db.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+
+            userFromDb.UserName = Input.Name;
+            userFromDb.Email = Input.Email;
+            //userFromDb.RoadNameAndNumber = Input.RoadNameAndNumber;
+            //userFromDb.AreaCodeAndTown = Input.AreaCodeAndTown;
+            userFromDb.PhoneNumber = Input.PhoneNumber;
+
+            await _db.SaveChangesAsync();
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

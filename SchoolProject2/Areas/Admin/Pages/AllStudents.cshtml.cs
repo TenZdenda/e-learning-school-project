@@ -20,9 +20,12 @@ namespace SchoolProject2.Areas.Admin.Pages
             _db = db;
         }
 
+        //[BindProperty]
+        //public List<StudentUser> StudentUserList { get; set; }
+
         public void OnGet()
         {
-            Students = _db.GetAllStudents();
+           Students = _db.GetAllStudents();
         }
     }
 }

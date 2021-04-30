@@ -15,6 +15,17 @@ namespace SchoolProject2.Data.EFRepository
         {
             context = db;
         }
+
+       
+        public void AddStudent(StudentUser student)
+        {
+            if (student != null)
+            {
+                context.StudentUsers.Add(student);
+                context.SaveChanges();
+            }
+        }
+
         public IEnumerable<StudentUser> GetAllStudents()
         {
             return context.StudentUsers ;

@@ -14,7 +14,10 @@
                     <label>Name</label>
                 </div>
                 <div class="col-6">
-                    <input asp-for="Student.Name" class="form-control" />
+                    @*<input asp-for="Student.Name" class="form-control" />*@
+                    <label asp-for="@Model.Student.Name" class="control-label"></label>
+                    <input asp-for="@Model.Student.Name" class="form-control" />
+                    <span asp-validation-for="@Model.Student.Name" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-2">
@@ -22,7 +25,10 @@
                     <label>Email</label>
                 </div>
                 <div class="col-6">
-                    <input asp-for="Student.Email" class="form-control" />
+                    @*<input asp-for="Student.Email" class="form-control" />*@
+                    <label asp-for="@Model.Student.Email" class="control-label"></label>
+                    <input asp-for="@Model.Student.Email" class="form-control" />
+                    <span asp-validation-for="@Model.Student.Email" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-2">
@@ -30,7 +36,10 @@
                     <label>Password</label>
                 </div>
                 <div class="col-6">
-                    <input asp-for="Student.Password" class="form-control" />
+                    @*<input asp-for="Student.Password" class="form-control" />*@
+                    <label asp-for="@Model.Student.Password" class="control-label"></label>
+                    <input asp-for="@Model.Student.Password" class="form-control" />
+                    <span asp-validation-for="@Model.Student.Password" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-2">
@@ -38,10 +47,16 @@
                     <label>Confirm password</label>
                 </div>
                 <div class="col-6">
-                    <input asp-for="Student.ConfirmPassword" class="form-control" />
+                    @*<input asp-for="Student.ConfirmPassword" class="form-control" />*@
+                    <label asp-for="@Model.Student.ConfirmPassword" class="control-label"></label>
+                    <input asp-for="@Model.Student.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="@Model.Student.ConfirmPassword" class="text-danger"></span>
                 </div>
             </div>
 
             <button type="submit" class="btn btn-primary offset-2">Create</button>
 </form>
+    </div>
+    <div>
+        <a asp-page="AllStudents">Back to List</a>
     </div>

@@ -10,5 +10,6 @@ namespace SchoolProject2.Data.Repository
     {
         IEnumerable<TeacherUser> GetAllTeachers();
         IEnumerable<StudentUser> GetAllStudents();
+        void AddStudent(StudentUser student);
     }
 }

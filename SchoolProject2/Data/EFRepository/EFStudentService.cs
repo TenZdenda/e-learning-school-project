@@ -7,6 +7,6 @@ namespace SchoolProject2.Data.EFRepository
 {
     public class EFStudentService
     {
-        string ahah1;
+        
     }
 }
