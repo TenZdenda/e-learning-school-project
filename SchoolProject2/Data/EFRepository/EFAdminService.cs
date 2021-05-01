@@ -27,14 +27,19 @@ namespace SchoolProject2.Data.EFRepository
             }
         }
 
-        public IEnumerable<StudentUser> GetAllStudents()
+        public List<StudentUser> GetAllStudents()
         {
-            return context.StudentUsers ;
+            return  context.StudentUsers.ToList();
         }
 
         public IEnumerable<TeacherUser> GetAllTeachers()
         {
-            return context.TeacherUsers;
+            return context.TeacherUsers.ToList();
         }
+
+    //    List<StudentUser> IAdminService.GetAllStudents()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
     }
 }
