@@ -1,4 +1,5 @@
-﻿using SchoolProject2.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using SchoolProject2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace SchoolProject2.Data.Repository
         IEnumerable<TeacherUser> GetAllTeachers();
         IEnumerable<StudentUser> GetAllStudents();
         void AddStudent(StudentUser student);
+        
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SchoolProject2.Data.Repository;
@@ -14,6 +15,7 @@ namespace SchoolProject2.Areas.Admin.Pages
         private readonly IAdminService _db;
         
         public StudentUser Student { get; set; }
+        
         public CreateStudentModel(IAdminService db)
         {
             _db = db;
@@ -23,7 +25,7 @@ namespace SchoolProject2.Areas.Admin.Pages
             
         }
 
-        public IActionResult OnPost(StudentUser Student)
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {

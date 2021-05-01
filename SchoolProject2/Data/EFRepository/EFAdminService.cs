@@ -1,4 +1,5 @@
-﻿using SchoolProject2.Data.Repository;
+﻿using Microsoft.AspNetCore.Identity;
+using SchoolProject2.Data.Repository;
 using SchoolProject2.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace SchoolProject2.Data.EFRepository
     public class EFAdminService : IAdminService
     {
         ApplicationDbContext context;
-        
+
         public EFAdminService(ApplicationDbContext db)
         {
             context = db;
