@@ -16,9 +16,24 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Phone Number</th>
                             <th></th>
                         </tr>
                     </thead>
+                    <tbody>
+
+                        @*@if (Model.TeacherUser != null)
+                        {
+                            @foreach (var item in Model.TeacherUser)
+                            {
+                                <tr>
+                                    <td>  @item.Id</td>
+                                    <td>  @item.Name  </td>
+                                    <td>  @item.Email </td>
+                                    <td>  @item.PhoneNumber </td>
+                                </tr>
+                            }
+                        }*@
                 </table>
             </div>
         </div>

@@ -14,9 +14,10 @@ namespace SchoolProject2.Areas.Admin.Pages
     public class AllStudentsModel : PageModel
     {
         private readonly IAdminService _db;
-        public List<StudentUser> Students { get; set; }
+        //private readonly ApplicationDbContext _db;
+        public IEnumerable<StudentUser> Student { get; set; }
 
-        public AllStudentsModel(IAdminService db)
+        public AllStudentsModel(IAdminService db /*ApplicationDbContext db*/)
         {
             _db = db;
         }
@@ -26,8 +27,9 @@ namespace SchoolProject2.Areas.Admin.Pages
 
         public void OnGet()
         {
-            Students = _db.GetAllStudents();
-            //Students = _db.GetAllStudents();
+            
+            //Students = _db.GetAllStudents().Where(user => user.Name == "Kristiin").ToList();
+            Student = _db.GetAllStudents();
         }
     }
 }

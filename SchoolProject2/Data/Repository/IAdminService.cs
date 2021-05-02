@@ -10,7 +10,7 @@ namespace SchoolProject2.Data.Repository
     public interface IAdminService
     {
         IEnumerable<TeacherUser> GetAllTeachers();
-        List<StudentUser> GetAllStudents();
+        IEnumerable<StudentUser> GetAllStudents();
         void AddStudent(StudentUser student);
         
     }

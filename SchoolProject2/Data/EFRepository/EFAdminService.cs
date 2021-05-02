@@ -27,9 +27,11 @@ namespace SchoolProject2.Data.EFRepository
             }
         }
 
-        public List<StudentUser> GetAllStudents()
+        public IEnumerable<StudentUser> GetAllStudents()
         {
-            return  context.StudentUsers.ToList();
+            return context.StudentUsers;
+            //return context.AdminUsers.Where(user=>user.UserName=="Vladimir").ToList();
+            
         }
 
         public IEnumerable<TeacherUser> GetAllTeachers()
