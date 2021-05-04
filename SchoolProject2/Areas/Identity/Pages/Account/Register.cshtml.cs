@@ -68,6 +68,9 @@ namespace SchoolProject2.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            public string Name { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -78,27 +81,55 @@ namespace SchoolProject2.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            string role = Request.Form["rdUserRole"].ToString();
+
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new IdentityUser 
+                { 
+                    UserName = Input.Email, 
+                    Email = Input.Email,
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 if (result.Succeeded)
                 {
                     if(!await _roleManager.RoleExistsAsync(SD.AdminUser))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.AdminUser));
+                        _roleManager.CreateAsync(new IdentityRole(SD.AdminUser)).GetAwaiter().GetResult();
+                        _roleManager.CreateAsync(new IdentityRole(SD.TeacherUser)).GetAwaiter().GetResult();
+                        _roleManager.CreateAsync(new IdentityRole(SD.StudentUser)).GetAwaiter().GetResult();
                     }
-                    if (!await _roleManager.RoleExistsAsync(SD.TeacherUser))
+
+                    if (result.Succeeded)
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.TeacherUser));
+                        if(role == SD.AdminUser)
+                        {
+                            await _userManager.AddToRoleAsync(user, SD.AdminUser);
+                        }
+                        else
+                        {
+                            if (role == SD.TeacherUser)
+                            {
+                                await _userManager.AddToRoleAsync(user, SD.TeacherUser);
+                            }
+                            else
+                            {
+                                await _userManager.AddToRoleAsync(user, SD.StudentUser);
+                            }
+                        }
                     }
-                    if (!await _roleManager.RoleExistsAsync(SD.StudentUser))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.StudentUser));
-                    }
-                    await _userManager.AddToRoleAsync(user, SD.AdminUser);
+                    //if (!await _roleManager.RoleExistsAsync(SD.TeacherUser))
+                    //{
+                    //    await _roleManager.CreateAsync(new IdentityRole(SD.TeacherUser));
+                    //}
+                    //if (!await _roleManager.RoleExistsAsync(SD.StudentUser))
+                    //{
+                    //    await _roleManager.CreateAsync(new IdentityRole(SD.StudentUser));
+                    //}
+                    //await _userManager.AddToRoleAsync(user, SD.AdminUser);
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
