@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SchoolProject2.Data.Repository;
 using SchoolProject2.Models;
+using SchoolProject2.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,27 +13,48 @@ namespace SchoolProject2.Data.EFRepository
     public class EFAdminService : IAdminService
     {
         ApplicationDbContext context;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public EFAdminService(ApplicationDbContext db)
+        public EFAdminService(ApplicationDbContext db, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
+            _userManager = userManager;
             context = db;
+            _roleManager = roleManager;
         }
 
-       
-        public void AddStudent(StudentUser student)
+
+        public async Task<bool> AddStudent(StudentUser student)
         {
             if (student != null)
             {
-                context.StudentUsers.Add(student);
-                context.SaveChanges();
+                var user = new StudentUser
+                {
+                    UserName = student.Email,
+                    Email = student.Email,
+                    Name = student.Name
+                };
+                var result = await _userManager.CreateAsync(user, student.Password);
+
+                if (result.Succeeded)
+                {
+                    if (!await _roleManager.RoleExistsAsync(SD.StudentUser))
+                        await _roleManager.CreateAsync(new IdentityRole(SD.StudentUser));
+
+                    await _userManager.AddToRoleAsync(user, SD.StudentUser);
+                    return true;
+                }
+                return false;
             }
+            return false;
         }
 
-        public IEnumerable<StudentUser> GetAllStudents()
+        public async Task<IEnumerable<StudentUser>> GetAllStudents()
         {
-            return context.StudentUsers;
+            var result = await context.StudentUsers.ToListAsync();
+            return result;
             //return context.AdminUsers.Where(user=>user.UserName=="Vladimir").ToList();
-            
+
         }
 
         public IEnumerable<TeacherUser> GetAllTeachers()
@@ -39,9 +62,22 @@ namespace SchoolProject2.Data.EFRepository
             return context.TeacherUsers.ToList();
         }
 
-    //    List<StudentUser> IAdminService.GetAllStudents()
-    //    {
-    //        throw new NotImplementedException();
-    //    }
+        public async Task<bool> DeleteStudent(string id)
+        {
+            if (id == null || id.Trim().Length == 0)
+                return false;
+
+            var userFromDb = await context.StudentUsers.FindAsync(id);
+
+            if (userFromDb == null)
+                return false;
+
+            context.Remove(userFromDb);
+
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        
     }
 }

@@ -14,6 +14,7 @@ namespace SchoolProject2.Areas.Admin.Pages
     {
         private readonly IAdminService _db;
         
+        [BindProperty]
         public StudentUser Student { get; set; }
         
         public CreateStudentModel(IAdminService db)
@@ -25,14 +26,21 @@ namespace SchoolProject2.Areas.Admin.Pages
             
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            _db.AddStudent(Student);
-            return RedirectToPage("AllStudents");
+            var result = await _db.AddStudent(Student);
+
+            if (result)
+                return RedirectToPage("AllStudents");
+            else
+            {
+                ModelState.AddModelError(string.Empty, "User not created");
+                return Page();
+            }
         }
     }
 }

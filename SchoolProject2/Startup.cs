@@ -41,9 +41,10 @@ namespace SchoolProject2
             
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders()
+                .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddSingleton<IEmailSender, EmailSender>();
+            //services.AddSingleton<IEmailSender>();
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //   .AddRoles<IdentityRole>()
             //   .AddDefaultTokenProviders()

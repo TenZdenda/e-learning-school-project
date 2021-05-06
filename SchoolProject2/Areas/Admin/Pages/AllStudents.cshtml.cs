@@ -16,22 +16,31 @@ namespace SchoolProject2.Areas.Admin.Pages
     public class AllStudentsModel : PageModel
     {
         private readonly IAdminService _db;
-        //private readonly ApplicationDbContext _db;
-        public IEnumerable<StudentUser> Student { get; set; }
 
-        public AllStudentsModel(IAdminService db /*ApplicationDbContext db*/)
+        public IEnumerable<StudentUser> Students { get; set; }
+
+        public AllStudentsModel(IAdminService db)
         {
             _db = db;
         }
 
-        //[BindProperty]
-        //public List<StudentUser> StudentUserList { get; set; }
 
-        public void OnGet()
+
+        public async Task<IActionResult> OnGetAsync()
         {
-            
-            //Students = _db.GetAllStudents().Where(user => user.Name == "Kristiin").ToList();
-            Student = _db.GetAllStudents();
+            Students = await _db.GetAllStudents();
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync(string id)
+        {
+            var result = await _db.DeleteStudent(id);
+            if (result)
+            {
+                Students = await _db.GetAllStudents();
+                return Page();
+            }
+            return Page();
         }
     }
 }
