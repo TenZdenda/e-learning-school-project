@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SchoolProject2.Data.Repository;
@@ -12,19 +14,49 @@ namespace SchoolProject2.Areas.Admin.Pages
     public class EditStudentModel : PageModel
     {
         private readonly IAdminService _db;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
         [BindProperty]
         public StudentUser Students { get; set; }
 
-        public EditStudentModel(IAdminService db)
+        [BindProperty(SupportsGet = true)]
+        public InputModel Input { get; set; }
+
+        public EditStudentModel(IAdminService db, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             _db = db;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
-        public async Task<IActionResult> OnGet(string id)
+
+        public class InputModel
         {
+            public string Name { get; set; }
+            public List<IdentityRole> AllRoles { get; set; }
+            public IdentityRole CurrentRole { get; set; }
+        }
+
+        public async Task OnGetAsync(string id)
+        {
+            Input.AllRoles = _roleManager.Roles.ToList();
+
+            if (string.IsNullOrWhiteSpace(id))
+                return;
+
             Students = await _db.GetStudent(id);
-            
-            return RedirectToPage("AllStudents");
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user is not null)
+            {
+                //var claimsIdentity = User.
+                //var roleResult = await _userManager.GetRolesAsync(user);
+                //Input.CurrentRole = roleResult.FirstOrDefault();
+            }
+
+            Input.Name = Students.Name;
+
+
         }
 
         public async Task<IActionResult> OnPostAsync(StudentUser student)

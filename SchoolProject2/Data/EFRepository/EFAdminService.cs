@@ -74,18 +74,6 @@ namespace SchoolProject2.Data.EFRepository
             return true;
         }
 
-        //public async Task<bool> UpdateStudent(string id)
-        //{
-        //    if (id == null || id.Trim().Length == 0)
-        //        return false;
-        //    var userFromDb = await context.StudentUsers.FindAsync(id);
-        //    if (userFromDb == null)
-        //        return false;
-        //    context.Update(userFromDb);
-        //    await context.SaveChangesAsync();
-        //    return true;
-        //}
-
         
         public async Task<bool> UpdateStudent(StudentUser updateStudent)
         {
@@ -96,12 +84,12 @@ namespace SchoolProject2.Data.EFRepository
             {
                 result.Name = updateStudent.Name;
                 result.Email = updateStudent.Email;
-                result.Password = updateStudent.Password;
-                result.ConfirmPassword = updateStudent.ConfirmPassword;
             }
-
-            context.Update(result);
+            else
+                return false;
             
+
+            await context.SaveChangesAsync();
             return true;
         }
 
