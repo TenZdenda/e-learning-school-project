@@ -82,7 +82,6 @@ namespace SchoolProject2.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            //string role = Request.Form["rdUserRole"].ToString();
 
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -100,38 +99,14 @@ namespace SchoolProject2.Areas.Identity.Pages.Account
                 {
                     if (!await _roleManager.RoleExistsAsync(SD.StudentUser))
                     {
-                        //_roleManager.CreateAsync(new IdentityRole(SD.AdminUser)).GetAwaiter().GetResult();
-                        //_roleManager.CreateAsync(new IdentityRole(SD.TeacherUser)).GetAwaiter().GetResult();
-                        await _roleManager.CreateAsync(new IdentityRole(SD.StudentUser))/*.GetAwaiter().GetResult()*/;
+                        
+                        await _roleManager.CreateAsync(new IdentityRole(SD.StudentUser));
                     }
 
                     // Add user in role
                     await _userManager.AddToRoleAsync(user, SD.StudentUser);
 
-                    //if (role == SD.AdminUser)
-                    //{
-                    //    await _userManager.AddToRoleAsync(user, SD.AdminUser);
-                    //}
-                    //else
-                    //{
-                    //    if (role == SD.TeacherUser)
-                    //    {
-                    //        await _userManager.AddToRoleAsync(user, SD.TeacherUser);
-                    //    }
-                    //    else
-                    //    {
-                    //        await _userManager.AddToRoleAsync(user, SD.StudentUser);
-                    //    }
-                    //}
-                    //if (!await _roleManager.RoleExistsAsync(SD.TeacherUser))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(SD.TeacherUser));
-                    //}
-                    //if (!await _roleManager.RoleExistsAsync(SD.StudentUser))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(SD.StudentUser));
-                    //}
-                    //await _userManager.AddToRoleAsync(user, SD.AdminUser);
+                   
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

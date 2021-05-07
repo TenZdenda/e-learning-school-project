@@ -13,16 +13,28 @@ namespace SchoolProject2.Areas.Admin.Pages
     {
 
         private readonly IAdminService _db;
-        public IEnumerable<TeacherUser> Students { get; set; }
+        public IEnumerable<TeacherUser> Teachers { get; set; }
 
         public AllTeachersModel(IAdminService db)
         {
             _db = db;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            Students = _db.GetAllTeachers();
+            Teachers = await _db.GetAllTeachers();
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync(string id)
+        {
+            var result = await _db.DeleteTeacher(id);
+            if (result)
+            {
+                Teachers = await _db.GetAllTeachers();
+                return Page();
+            }
+            return Page();
         }
     }
 }

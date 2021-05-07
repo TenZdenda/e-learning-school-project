@@ -1,0 +1,64 @@
+﻿@page "{id}"
+@model SchoolProject2.Areas.Admin.Pages.EditStudentModel
+@{
+}
+
+<div class="container">
+    <div class="row mb-2">
+        <div class="col">
+            <h1 class="text-info">Create New Student</h1>
+        </div>
+    </div>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label>Name</label>
+            </div>
+            <div class="col-6">
+                @*<input asp-for="Student.Name" class="form-control" />*@
+                <label asp-for="@Model.Students.Name" class="control-label"></label>
+                <input asp-for="@Model.Students.Name" class="form-control" />
+                <span asp-validation-for="@Model.Students.Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label>Email</label>
+            </div>
+            <div class="col-6">
+                @*<input asp-for="Student.Email" class="form-control" />*@
+                <label asp-for="@Model.Students.Email" class="control-label"></label>
+                <input asp-for="@Model.Students.Email" class="form-control" />
+                <span asp-validation-for="@Model.Students.Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label>Password</label>
+            </div>
+            <div class="col-6">
+                @*<input asp-for="Student.Password" class="form-control" />*@
+                <label asp-for="@Model.Students.Password" class="control-label"></label>
+                <input asp-for="@Model.Students.Password" class="form-control" />
+                <span asp-validation-for="@Model.Students.Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label>Confirm password</label>
+            </div>
+            <div class="col-6">
+                @*<input asp-for="Student.ConfirmPassword" class="form-control" />*@
+                <label asp-for="@Model.Students.ConfirmPassword" class="control-label"></label>
+                <input asp-for="@Model.Students.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="@Model.Students.ConfirmPassword" class="text-danger"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary offset-2">Update</button>
+    </form>
+</div>
+<div>
+    <a asp-page="AllStudents">Back to List</a>
+</div>

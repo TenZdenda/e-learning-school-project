@@ -9,32 +9,35 @@ using SchoolProject2.Models;
 
 namespace SchoolProject2.Areas.Admin.Pages
 {
-    public class CreateTeacherModel : PageModel
+    public class EditStudentModel : PageModel
     {
         private readonly IAdminService _db;
+
         [BindProperty]
-        public TeacherUser Teacher { get; set; }
-        public CreateTeacherModel(IAdminService db)
+        public StudentUser Students { get; set; }
+
+        public EditStudentModel(IAdminService db)
         {
             _db = db;
         }
-
-
-        public void OnGet()
+        public async Task<IActionResult> OnGet(string id)
         {
-
+            Students = await _db.GetStudent(id);
+            
+            return RedirectToPage("AllStudents");
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(StudentUser student)
         {
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            var result = await _db.AddTeacher(Teacher);
+            var result = await _db.UpdateStudent(student);
 
             if (result)
-                return RedirectToPage("AllTeachers");
+                return RedirectToPage("AllStudents");
             else
             {
                 ModelState.AddModelError(string.Empty, "User not created");

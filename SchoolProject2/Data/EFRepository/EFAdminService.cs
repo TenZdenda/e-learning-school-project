@@ -53,14 +53,10 @@ namespace SchoolProject2.Data.EFRepository
         {
             var result = await context.StudentUsers.ToListAsync();
             return result;
-            //return context.AdminUsers.Where(user=>user.UserName=="Vladimir").ToList();
+           
 
         }
 
-        public IEnumerable<TeacherUser> GetAllTeachers()
-        {
-            return context.TeacherUsers.ToList();
-        }
 
         public async Task<bool> DeleteStudent(string id)
         {
@@ -78,6 +74,99 @@ namespace SchoolProject2.Data.EFRepository
             return true;
         }
 
+        //public async Task<bool> UpdateStudent(string id)
+        //{
+        //    if (id == null || id.Trim().Length == 0)
+        //        return false;
+        //    var userFromDb = await context.StudentUsers.FindAsync(id);
+        //    if (userFromDb == null)
+        //        return false;
+        //    context.Update(userFromDb);
+        //    await context.SaveChangesAsync();
+        //    return true;
+        //}
+
         
+        public async Task<bool> UpdateStudent(StudentUser updateStudent)
+        {
+           var result = await context.StudentUsers.FirstOrDefaultAsync(e => e.Id == updateStudent.Id);
+            
+
+            if (result != null)
+            {
+                result.Name = updateStudent.Name;
+                result.Email = updateStudent.Email;
+                result.Password = updateStudent.Password;
+                result.ConfirmPassword = updateStudent.ConfirmPassword;
+            }
+
+            context.Update(result);
+            
+            return true;
+        }
+
+        public async Task<StudentUser> GetStudent(string id)
+        {
+            var result = await context.StudentUsers.FindAsync(id);
+            return result;
+        }
+
+
+        /// 
+        /// TEACHERS
+        /// 
+        
+
+        public async Task<IEnumerable<TeacherUser>> GetAllTeachers()
+        {
+            var result = await context.TeacherUsers.ToListAsync();
+            return result;
+        }
+
+        public async Task<bool> AddTeacher(TeacherUser teacher)
+        {
+            if (teacher != null)
+            {
+                var user = new TeacherUser
+                {
+                    UserName = teacher.Email,
+                    Email = teacher.Email,
+                    Name = teacher.Name
+                };
+                var result = await _userManager.CreateAsync(user, teacher.Password);
+
+                if (result.Succeeded)
+                {
+                    if (!await _roleManager.RoleExistsAsync(SD.TeacherUser))
+                        await _roleManager.CreateAsync(new IdentityRole(SD.TeacherUser));
+
+                    await _userManager.AddToRoleAsync(user, SD.TeacherUser);
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+
+        public async Task<bool> DeleteTeacher(string id)
+        {
+            if (id == null || id.Trim().Length == 0)
+                return false;
+
+            var userFromDb = await context.TeacherUsers.FindAsync(id);
+
+            if (userFromDb == null)
+                return false;
+
+            context.Remove(userFromDb);
+
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        public Task<bool> UpdateTeacher()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

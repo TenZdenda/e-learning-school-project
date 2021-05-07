@@ -24,8 +24,6 @@ namespace SchoolProject2.Areas.Admin.Pages
             _db = db;
         }
 
-
-
         public async Task<IActionResult> OnGetAsync()
         {
             Students = await _db.GetAllStudents();
