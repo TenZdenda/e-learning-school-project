@@ -93,6 +93,19 @@ namespace SchoolProject2.Data.EFRepository
             return true;
         }
 
+        public async Task<IdentityRole> GetUserRoleOrNullAsync(IdentityUser user)
+        {
+            foreach (var role in _roleManager.Roles)
+            {
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    var returnedRole = new IdentityRole(role.Name);
+                    return returnedRole;
+                }
+            }
+            return null;
+        }
+
         public async Task<StudentUser> GetStudent(string id)
         {
             var result = await context.StudentUsers.FindAsync(id);

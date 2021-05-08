@@ -37,6 +37,20 @@ namespace SchoolProject2.Areas.Admin.Pages
             public IdentityRole CurrentRole { get; set; }
         }
 
+
+        public async Task<IdentityRole> GetUserRoleOrNullAsync(IdentityUser user)
+        {
+            foreach (var role in _roleManager.Roles)
+            {
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    var returnedRole = new IdentityRole(role.Name);
+                    return returnedRole;
+                }
+            }
+            return null;
+        }
+
         public async Task OnGetAsync(string id)
         {
             Input.AllRoles = _roleManager.Roles.ToList();
@@ -47,14 +61,17 @@ namespace SchoolProject2.Areas.Admin.Pages
             Students = await _db.GetStudent(id);
             var user = await _userManager.FindByIdAsync(id);
 
+           
             if (user is not null)
             {
-                //var claimsIdentity = User.
-                //var roleResult = await _userManager.GetRolesAsync(user);
-                //Input.CurrentRole = roleResult.FirstOrDefault();
+                //var roleResult = await _userManager.IsInRoleAsync(user, id);
+                //Input.CurrentRole = roleResult.
             }
 
             Input.Name = Students.Name;
+
+
+
 
 
         }

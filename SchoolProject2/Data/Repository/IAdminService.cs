@@ -14,6 +14,7 @@ namespace SchoolProject2.Data.Repository
         Task<bool> DeleteStudent(string id);
         Task<bool> UpdateStudent(StudentUser updateStudent);
         Task<StudentUser> GetStudent(string id);
+        Task<IdentityRole> GetUserRoleOrNullAsync(IdentityUser user);
 
         ////Teacher////
         Task<IEnumerable<TeacherUser>> GetAllTeachers();

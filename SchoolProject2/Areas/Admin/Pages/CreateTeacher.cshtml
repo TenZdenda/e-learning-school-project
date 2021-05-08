@@ -10,9 +10,6 @@
     <form method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row mb-2">
-            <div class="col-2">
-                <label>Name</label>
-            </div>
             <div class="col-6">
                 @*<input asp-for="Teacher.Name" class="form-control" />*@
                 <label asp-for="@Model.Teacher.Name" class="control-label"></label>
@@ -21,9 +18,6 @@
             </div>
         </div>
         <div class="row mb-2">
-            <div class="col-2">
-                <label>Email</label>
-            </div>
             <div class="col-6">
                 @*<input asp-for="Teacher.Email" class="form-control" />*@
                 <label asp-for="@Model.Teacher.Email" class="control-label"></label>
@@ -32,9 +26,6 @@
             </div>
         </div>
         <div class="row mb-2">
-            <div class="col-2">
-                <label>Password</label>
-            </div>
             <div class="col-6">
                 @*<input asp-for="Teacher.Password" class="form-control" />*@
                 <label asp-for="@Model.Teacher.Password" class="control-label"></label>
@@ -43,9 +34,6 @@
             </div>
         </div>
         <div class="row mb-2">
-            <div class="col-2">
-                <label>Confirm password</label>
-            </div>
             <div class="col-6">
                 @*<input asp-for="Teacher.ConfirmPassword" class="form-control" />*@
                 <label asp-for="@Model.Teacher.ConfirmPassword" class="control-label"></label>
