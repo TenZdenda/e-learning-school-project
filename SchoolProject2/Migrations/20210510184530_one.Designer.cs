@@ -10,7 +10,7 @@ using SchoolProject2.Data;
 namespace SchoolProject2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210508084551_one")]
+    [Migration("20210510184530_one")]
     partial class one
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,21 +20,6 @@ namespace SchoolProject2.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("CourseStudentUser", b =>
-                {
-                    b.Property<int>("CoursesId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StudentUsersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("CoursesId", "StudentUsersId");
-
-                    b.HasIndex("StudentUsersId");
-
-                    b.ToTable("CourseStudentUser");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -240,7 +225,7 @@ namespace SchoolProject2.Migrations
 
             modelBuilder.Entity("SchoolProject2.Models.Course", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CourseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -250,33 +235,20 @@ namespace SchoolProject2.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("SchoolProject2.Models.Test", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumOfQuestions")
-                        .HasColumnType("int");
+                    b.Property<string>("StudentUserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TestName")
+                    b.Property<string>("TeacherId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("CourseId");
 
-                    b.ToTable("Tests");
+                    b.HasIndex("StudentUserId");
+
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("SchoolProject2.Models.AdminUser", b =>
@@ -335,21 +307,6 @@ namespace SchoolProject2.Migrations
                     b.HasDiscriminator().HasValue("TeacherUser");
                 });
 
-            modelBuilder.Entity("CourseStudentUser", b =>
-                {
-                    b.HasOne("SchoolProject2.Models.Course", null)
-                        .WithMany()
-                        .HasForeignKey("CoursesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SchoolProject2.Models.StudentUser", null)
-                        .WithMany()
-                        .HasForeignKey("StudentUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -399,6 +356,18 @@ namespace SchoolProject2.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SchoolProject2.Models.Course", b =>
+                {
+                    b.HasOne("SchoolProject2.Models.StudentUser", null)
+                        .WithMany("Courses")
+                        .HasForeignKey("StudentUserId");
+                });
+
+            modelBuilder.Entity("SchoolProject2.Models.StudentUser", b =>
+                {
+                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }
