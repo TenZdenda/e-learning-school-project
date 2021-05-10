@@ -8,7 +8,7 @@ namespace SchoolProject2.Models
 {
     public class Schedule
     {
-        public int Id { get; set; }
+        public int ScheduleId { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -16,9 +16,10 @@ namespace SchoolProject2.Models
 
         public DateTime EndTime { get; set; }
 
-        
+        [ForeignKey("Course")]
         public int CourseId { get; set; }
-        [ForeignKey(nameof(CourseId))]
+       
         public virtual Course Course { get; set; }
+
     }
 }

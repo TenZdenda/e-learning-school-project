@@ -52,8 +52,7 @@ namespace SchoolProject2.Data.EFRepository
         public async Task<IEnumerable<StudentUser>> GetAllStudents()
         {
             var result = await context.StudentUsers.ToListAsync();
-            return result;
-           
+            return result;           
 
         }
 
@@ -166,6 +165,28 @@ namespace SchoolProject2.Data.EFRepository
         }
 
         public Task<bool> UpdateTeacher()
+        {
+            throw new NotImplementedException();
+        }
+
+        // COURSES
+        public async Task<IEnumerable<Course>> GetAllCourses()
+        {
+            var result = await context.Courses.ToListAsync();
+            return result;
+        }
+
+        public Task<bool> AddCourse(Course course)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteCourse(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateCourse(Course course)
         {
             throw new NotImplementedException();
         }

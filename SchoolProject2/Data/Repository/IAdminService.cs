@@ -21,6 +21,12 @@ namespace SchoolProject2.Data.Repository
         Task<bool> AddTeacher(TeacherUser teacher);
         Task<bool> DeleteTeacher(string id);
         Task<bool> UpdateTeacher();
-        
+
+        ////Course////
+        Task<IEnumerable<Course>> GetAllCourses();
+        Task<bool> AddCourse(Course course);
+        Task<bool> DeleteCourse(int id);
+        Task<bool> UpdateCourse(Course course);
+
     }
 }
