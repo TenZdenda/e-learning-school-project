@@ -1,4 +1,32 @@
 ﻿@page
 @model SchoolProject2.Areas.Admin.Pages.CreateCourseModel
-@{
-}
+
+<div class="container">
+    <div class="row mb-2">
+        <div class="col">
+            <h1 class="text-info">Create New Student</h1>
+        </div>
+    </div>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row mb-2">
+            <div class="col-6">    
+            <label asp-for="@Model.Course.CourseName" class="control-label"></label>
+            <input asp-for="@Model.Course.CourseName" class="form-control" />
+            <span asp-validation-for="@Model.Course.CourseName" class="text-danger"></span>
+        </div>
+        </div>
+        <div class="row mb-2">
+        <div class="col-6">    
+            <label asp-for="@Model.Course.Duration" class="control-label"></label>
+            <input asp-for="@Model.Course.Duration" class="form-control" />
+            <span asp-validation-for="@Model.Course.Duration" class="text-danger"></span>
+        </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary offset-2">Create</button>
+    </form>
+</div>
+<div>
+    <a asp-page="AllStudents">Back to List</a>
+</div>

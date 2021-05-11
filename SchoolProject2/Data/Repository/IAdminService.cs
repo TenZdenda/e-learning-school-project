@@ -24,7 +24,7 @@ namespace SchoolProject2.Data.Repository
 
         ////Course////
         Task<IEnumerable<Course>> GetAllCourses();
-        Task<bool> AddCourse(Course course);
+        bool AddCourse(Course course);
         Task<bool> DeleteCourse(int id);
         Task<bool> UpdateCourse(Course course);
 

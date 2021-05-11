@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolProject2.Data;
 
 namespace SchoolProject2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210511123019_six")]
+    partial class six
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,12 +238,10 @@ namespace SchoolProject2.Migrations
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
-                    b.Property<string>("TeacherUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CourseId");
-
-                    b.HasIndex("TeacherUserId");
 
                     b.ToTable("Courses");
                 });
@@ -370,15 +370,6 @@ namespace SchoolProject2.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SchoolProject2.Models.Course", b =>
-                {
-                    b.HasOne("SchoolProject2.Models.TeacherUser", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherUserId");
-
-                    b.Navigation("Teacher");
                 });
 #pragma warning restore 612, 618
         }

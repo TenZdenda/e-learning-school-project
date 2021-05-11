@@ -176,9 +176,21 @@ namespace SchoolProject2.Data.EFRepository
             return result;
         }
 
-        public Task<bool> AddCourse(Course course)
+        public bool AddCourse(Course course)
         {
-            throw new NotImplementedException();
+            if (course != null)
+            {
+                course = new Course
+                {
+                    CourseName = course.CourseName,
+                    Duration = course.Duration                   
+                };
+                
+                context.Courses.Add(course);
+                context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         public Task<bool> DeleteCourse(int id)

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolProject2.Data;
 
 namespace SchoolProject2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210511122418_five")]
+    partial class five
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,12 +238,15 @@ namespace SchoolProject2.Migrations
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
-                    b.Property<string>("TeacherUserId")
+                    b.Property<string>("TeacherId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CourseId");
 
-                    b.HasIndex("TeacherUserId");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Courses");
                 });
@@ -376,7 +381,7 @@ namespace SchoolProject2.Migrations
                 {
                     b.HasOne("SchoolProject2.Models.TeacherUser", "Teacher")
                         .WithMany()
-                        .HasForeignKey("TeacherUserId");
+                        .HasForeignKey("TeacherId");
 
                     b.Navigation("Teacher");
                 });

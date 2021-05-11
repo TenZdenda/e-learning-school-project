@@ -21,9 +21,9 @@ namespace SchoolProject2.Models
         public int Duration { get; set; }
 
         [ForeignKey("TeacherUser")]
-        public string? UserId { get; set; }
+        public string? TeacherUserId { get; set; }
 
-        //public virtual TeacherUser Teacher { get; set; }
+        public virtual TeacherUser Teacher { get; set; }
 
         //public virtual ICollection<StudentUser> StudentUsers { get; set; }
     }

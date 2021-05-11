@@ -24,6 +24,6 @@ namespace SchoolProject2.Models
         [NotMapped] //ignore
         public string ConfirmPassword { get; set; }
 
-        public virtual ICollection<Course> Courses { get; set; }
+       // public virtual ICollection<Course> Courses { get; set; }
     }
 }
