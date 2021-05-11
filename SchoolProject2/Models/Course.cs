@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,7 +21,9 @@ namespace SchoolProject2.Models
         public int Duration { get; set; }
 
         [ForeignKey("TeacherUser")]
-        public string? TeacherId { get; set; }
+        public string? UserId { get; set; }
+
+        //public virtual TeacherUser Teacher { get; set; }
 
         //public virtual ICollection<StudentUser> StudentUsers { get; set; }
     }

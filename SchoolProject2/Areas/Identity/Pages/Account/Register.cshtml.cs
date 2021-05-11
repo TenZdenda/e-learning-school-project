@@ -87,7 +87,7 @@ namespace SchoolProject2.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AdminUser
+                var user = new StudentUser
                 {
                     UserName = Input.Email,
                     Email = Input.Email,
@@ -97,14 +97,14 @@ namespace SchoolProject2.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    if (!await _roleManager.RoleExistsAsync(SD.AdminUser))
+                    if (!await _roleManager.RoleExistsAsync(SD.StudentUser))
                     {
                         
-                        await _roleManager.CreateAsync(new IdentityRole(SD.AdminUser));
+                        await _roleManager.CreateAsync(new IdentityRole(SD.StudentUser));
                     }
 
                     // Add user in role
-                    await _userManager.AddToRoleAsync(user, SD.AdminUser);
+                    await _userManager.AddToRoleAsync(user, SD.StudentUser);
 
                    
                     _logger.LogInformation("User created a new account with password.");
