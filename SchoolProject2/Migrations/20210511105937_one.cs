@@ -55,6 +55,20 @@ namespace SchoolProject2.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -169,7 +183,6 @@ namespace SchoolProject2.Migrations
                     CourseName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TeacherId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     StudentUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -178,12 +191,6 @@ namespace SchoolProject2.Migrations
                     table.ForeignKey(
                         name: "FK_Courses_AspNetUsers_StudentUserId",
                         column: x => x.StudentUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Courses_AspNetUsers_TeacherId",
-                        column: x => x.TeacherId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -232,11 +239,6 @@ namespace SchoolProject2.Migrations
                 name: "IX_Courses_StudentUserId",
                 table: "Courses",
                 column: "StudentUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Courses_TeacherId",
-                table: "Courses",
-                column: "TeacherId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -258,6 +260,9 @@ namespace SchoolProject2.Migrations
 
             migrationBuilder.DropTable(
                 name: "Courses");
+
+            migrationBuilder.DropTable(
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

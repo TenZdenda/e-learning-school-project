@@ -10,7 +10,7 @@ using SchoolProject2.Data;
 namespace SchoolProject2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210511095138_one")]
+    [Migration("20210511105937_one")]
     partial class one
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,9 +241,6 @@ namespace SchoolProject2.Migrations
                     b.Property<string>("StudentUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("TeacherId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
@@ -251,9 +248,26 @@ namespace SchoolProject2.Migrations
 
                     b.HasIndex("StudentUserId");
 
-                    b.HasIndex("TeacherId");
-
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("SchoolProject2.Models.Event", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("SchoolProject2.Models.AdminUser", b =>
@@ -368,12 +382,6 @@ namespace SchoolProject2.Migrations
                     b.HasOne("SchoolProject2.Models.StudentUser", null)
                         .WithMany("Courses")
                         .HasForeignKey("StudentUserId");
-
-                    b.HasOne("SchoolProject2.Models.TeacherUser", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId");
-
-                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("SchoolProject2.Models.StudentUser", b =>
