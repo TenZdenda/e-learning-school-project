@@ -23,7 +23,7 @@ namespace SchoolProject2.Models
         [ForeignKey("TeacherUser")]
         public string? UserId { get; set; }
 
-        //public virtual TeacherUser Teacher { get; set; }
+        public virtual TeacherUser Teacher { get; set; }
 
         //public virtual ICollection<StudentUser> StudentUsers { get; set; }
     }
