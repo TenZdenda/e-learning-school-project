@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Shared\Scaff\" />
+    <Folder Include="Areas\Identity\Pages\Shared\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using SchoolProject2.Utility
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,8 +34,8 @@
                 </button>
             </div>
             <nav class="space-y-4">
-                <a href="#"
-                           class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
+                <a asp-area="Admin" asp-page="/Index"
+                   class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="h-6 w-6"
                          fill="none"
@@ -43,8 +48,8 @@
                     </svg>
                     <span class="font-semibold text-md">Dashboard</span>
                 </a>
-                <a asp-page="AllStudents"
-                           class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
+                <a asp-area="Admin" asp-page="/AllStudents"
+                   class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="h-6 w-6"
                          fill="none"
@@ -59,8 +64,8 @@
                     </svg>
                     <span class="font-semibold text-md">Students</span>
                 </a>
-                <a asp-page="AllCourses"
-                           class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
+                <a asp-area="Admin" asp-page="/AllCourses"
+                   class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="h-6 w-6"
                          fill="none"
@@ -73,8 +78,8 @@
                     </svg>
                     <span class="font-semibold text-md">Courses</span>
                 </a>
-                <a asp-page="AllTeachers"
-                           class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
+                <a asp-area="Admin" asp-page="/AllTeachers"
+                   class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="h-6 w-6"
                          fill="none"
@@ -85,24 +90,26 @@
                               stroke-width="2"
                               d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
-                    <span class="font-semibold text-md">Staff</span>
+                    <span class="font-semibold text-md">Teachers</span>
                 </a>
             </nav>
             <hr class="border-gray-700" />
             <div>
-                <button class="w-full px-4 py-2.5 text-left text-white flex space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         class="h-6 w-6"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor">
-                        <path stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                    </svg>
-                    <span>Log out</span>
-                </button>
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                    <button class="w-full px-4 py-2.5 text-left text-white flex space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl focus:outline-none" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="h-6 w-6"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                        </svg>
+                        <span>Log out</span>
+                    </button>
+                </form>
             </div>
         </div>
         <!-- Scroll wrapper -->
@@ -123,13 +130,13 @@
                         </svg>
                     </button>
                     <a href="#"
-                               class="flex items-center p-2 hover:bg-gray-100 rounded-full">
+                       class="flex items-center p-2 hover:bg-gray-100 rounded-full">
                         <img class="h-10 w-10 md:h-12 md:w-12 rounded-full"
                              src="https://avatars.githubusercontent.com/u/39481226?v=4"
-                             alt="Zdeněk" />
+                             alt="Profile picture" />
                         <div class="ml-4 hidden md:block">
-                            <p class="font-bold">Zdeněk Pašek</p>
-                            <p class="text-gray-500">hello@zdenekpasek.com</p>
+                            <p class="font-bold">@User.Identity.Name</p>
+                            <p class="text-gray-500">Email address</p>
                         </div>
                     </a>
                 </div>
@@ -139,5 +146,9 @@
             </div>
         </div>
     </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -3,35 +3,39 @@
 @{
 }
 
-<div class="container">
-    <div class="row mb-2">
-        <div class="col">
-            <h1 class="text-info">Edit Student</h1>
+<div>
+    <div class="mb-10 flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold">Edit student</h1>
+            <p class="text-gray-500">Fill the form</p>
         </div>
     </div>
-    <form method="post">
+
+    <form class="max-w-2xl">
         <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="row mb-2">
-            <div class="col-6">
-                @*<input asp-for="Student.Name" class="form-control" />*@
-                <label asp-for="Input.Name" class="control-label"></label>
-                <input asp-for="Input.Name" class="form-control" />
-                <span asp-validation-for="Input.Name" class="text-danger"></span>
+        <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 md:gap-y-5">
+            <div>
+                <input asp-for="@Input.Name" placeholder="Student's name" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="@Input.Name" class="text-danger"></span>
             </div>
-        </div>
-        <div class="row mb-2">
-            <div class="col-6">
-                @*<input asp-for="Student.Name" class="form-control" />*@
-                <label asp-for="@Model.Students.Name" class="control-label"></label>
-                <select asp-for="Input.AllRoles" asp-items="@(new SelectList(Model.Input.AllRoles))" class="custom-select"></select>
+            <div>
+                <select asp-for="Input.AllRoles" asp-items="@(new SelectList(Model.Input.AllRoles))" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100"></select>
                 <span asp-validation-for="@Model.Students.Name" class="text-danger"></span>
             </div>
         </div>
-
-
-        <button type="submit" class="btn btn-primary offset-2">Update</button>
+        <div>
+            <div class="flex justify-end items-center gap-6 mt-16">
+                <a href="#" class="text-gray-500 hover:text-gray-900">Cancel</a>
+                <button name="submit"
+                        type="submit"
+                        class="px-10 py-4 bg-pink-500 hover:bg-pink-800 text-white font-semibold rounded">
+                    Update student
+                </button>
+            </div>
+        </div>
     </form>
 </div>
+
 <div>
     <a asp-page="AllStudents">Back to List</a>
 </div>
