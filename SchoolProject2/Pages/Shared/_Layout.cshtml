@@ -26,6 +26,24 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+                        @if (User.IsInRole(SD.StudentUser))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Student" asp-page="/Courses">Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Student" asp-page="/Schedule">Schedule</a>
+                            </li>
+                        }
+                        @if (User.IsInRole(SD.TeacherUser))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Teacher" asp-page="/Courses">Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Teacher" asp-page="/Schedule">Schedule</a>
+                            </li>
+                        }
                         @if (User.IsInRole(SD.AdminUser))
                         {
                             <li class="nav-item">
