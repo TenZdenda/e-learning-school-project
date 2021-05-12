@@ -193,9 +193,20 @@ namespace SchoolProject2.Data.EFRepository
             return false;
         }
 
-        public Task<bool> DeleteCourse(int id)
+        public async Task<bool> DeleteCourse(int id)
         {
-            throw new NotImplementedException();
+            if (id == null || id == 0)
+                return false;
+
+            var courseFromDb = await context.Courses.FindAsync(id);
+
+            if (courseFromDb == null)
+                return false;
+
+            context.Remove(courseFromDb);
+
+            await context.SaveChangesAsync();
+            return true;
         }
 
         public Task<bool> UpdateCourse(Course course)

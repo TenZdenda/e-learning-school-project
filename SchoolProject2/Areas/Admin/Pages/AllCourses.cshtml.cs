@@ -26,9 +26,9 @@ namespace SchoolProject2.Areas.Admin.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            var result = await _db.DeleteStudent(id);
+            var result = await _db.DeleteCourse(id);
             if (result)
             {
                 Courses = await _db.GetAllCourses();

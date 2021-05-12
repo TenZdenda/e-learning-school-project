@@ -13,7 +13,7 @@ namespace SchoolProject2.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CourseId { get; set; }
-
+        
         [Required]
         [MaxLength(50)]
         public string CourseName { get; set; }
