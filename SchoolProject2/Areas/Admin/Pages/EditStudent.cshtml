@@ -15,8 +15,8 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 md:gap-y-5">
             <div>
-                <input asp-for="@Input.Name" placeholder="Student's name" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
-                <span asp-validation-for="@Input.Name" class="text-danger"></span>
+                <input asp-for="Input.Name" placeholder="Student's name" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
             <div>
                 <select asp-for="Input.AllRoles" asp-items="@(new SelectList(Model.Input.AllRoles))" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100"></select>
