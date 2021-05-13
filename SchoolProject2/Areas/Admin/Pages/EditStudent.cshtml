@@ -19,8 +19,8 @@
                 <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
             <div>
-                <select asp-for="Input.AllRoles" asp-items="@(new SelectList(Model.Input.AllRoles))" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100"></select>
-                <span asp-validation-for="@Model.Students.Name" class="text-danger"></span>
+                <select asp-for="Input.CurrentRoleName" asp-items="Model.Input.AllRoles" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100"></select>
+                <span asp-validation-for="Input.CurrentRoleName" class="text-danger"></span>
             </div>
         </div>
         <div>

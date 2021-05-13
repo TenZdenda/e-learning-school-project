@@ -74,22 +74,53 @@ namespace SchoolProject2.Data.EFRepository
         }
 
         
-        public async Task<bool> UpdateStudent(StudentUser updateStudent)
+        public async Task<bool> UpdateStudent(string id, string newName, string newRole)
         {
-           var result = await context.StudentUsers.FirstOrDefaultAsync(e => e.Id == updateStudent.Id);
-            
+            var userFromDb = await context.Users.FindAsync(id);
 
-            if (result != null)
-            {
-                result.Name = updateStudent.Name;
-                result.Email = updateStudent.Email;
-            }
-            else
+            if (userFromDb is null)
                 return false;
-            
 
-            await context.SaveChangesAsync();
-            return true;
+            var type = userFromDb.GetType().Name;
+
+            switch (type)
+            {
+                case nameof(StudentUser):
+                    var castedStudent = userFromDb as StudentUser;
+                    castedStudent.Name = newName;
+                    var currentRoleName = await GetUserRoleOrNullAsync(castedStudent.Id);
+                    if(newRole != currentRoleName)
+                    {
+                        await _userManager.RemoveFromRoleAsync(castedStudent, currentRoleName);
+                        await _userManager.AddToRoleAsync(castedStudent, newRole);
+                    }
+                    await context.SaveChangesAsync();
+                    return true;
+                case nameof(AdminUser):
+                    var castedAdmin = userFromDb as AdminUser;
+                    castedAdmin.Name = newName;
+                    var currentRoleAdmin = await GetUserRoleOrNullAsync(castedAdmin.Id);
+                    if(newRole != currentRoleAdmin)
+                    {
+                        await _userManager.RemoveFromRoleAsync(castedAdmin, currentRoleAdmin);
+                        await _userManager.AddToRoleAsync(castedAdmin, currentRoleAdmin);
+                    }
+                    await context.SaveChangesAsync();
+                    return true;
+                case nameof(TeacherUser):
+                    var castedTeacher = userFromDb as TeacherUser;
+                    castedTeacher.Name = newName;
+                    var currentRoleTeacher = await GetUserRoleOrNullAsync(castedTeacher.Id);
+                    if (newRole != currentRoleTeacher)
+                    {
+                        await _userManager.RemoveFromRoleAsync(castedTeacher, currentRoleTeacher);
+                        await _userManager.AddToRoleAsync(castedTeacher, currentRoleTeacher);
+                    }
+                    await context.SaveChangesAsync();
+                    return true;
+            }
+
+            return false;
         }
 
         public async Task<IdentityRole> GetUserRoleOrNullAsync(IdentityUser user)
@@ -212,6 +243,23 @@ namespace SchoolProject2.Data.EFRepository
         public Task<bool> UpdateCourse(Course course)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<IdentityRole>> GetAllRolesAsync()
+        {
+            return await _roleManager.Roles.ToListAsync();
+        }
+
+        public async Task<string> GetUserRoleOrNullAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            foreach (var role in _roleManager.Roles)
+            {
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                    return role.Name;
+            }
+            return null;
         }
     }
 }

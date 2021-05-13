@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SchoolProject2.Data.Repository;
 using SchoolProject2.Models;
 
@@ -17,8 +19,8 @@ namespace SchoolProject2.Areas.Admin.Pages
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<IdentityUser> _userManager;
 
-        [BindProperty]
-        public StudentUser Students { get; set; }
+        //[BindProperty]
+        //public StudentUser Students { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public InputModel Input { get; set; }
@@ -33,65 +35,121 @@ namespace SchoolProject2.Areas.Admin.Pages
         public class InputModel
         {
             public string Name { get; set; }
-            public List<IdentityRole> AllRoles { get; set; }
-            public IdentityRole CurrentRole { get; set; }
+            public SelectList AllRoles { get; set; }
+            public string CurrentRoleName { get; set; }
         }
 
 
-        public async Task<IdentityRole> GetUserRoleOrNullAsync(IdentityUser user)
-        {
-            foreach (var role in _roleManager.Roles)
-            {
-                if (await _userManager.IsInRoleAsync(user, role.Name))
-                {
-                    var returnedRole = new IdentityRole(role.Name);
-                    return returnedRole;
-                }
-            }
-            return null;
-        }
+        //public async Task<IdentityRole> GetUserRoleOrNullAsync(IdentityUser userFromDb)
+        //{
+        //    foreach (var role in _roleManager.Roles)
+        //    {
+        //        if (await _userManager.IsInRoleAsync(userFromDb, role.Name))
+        //        {
+        //            var returnedRole = new IdentityRole(role.Name);
+        //            return returnedRole;
+        //        }
+        //    }
+        //    return null;
+        //}
 
         public async Task OnGetAsync(string id)
         {
-            Input.AllRoles = _roleManager.Roles.ToList();
-
             if (string.IsNullOrWhiteSpace(id))
                 return;
 
-            Students = await _db.GetStudent(id);
-            var user = await _userManager.FindByIdAsync(id);
+            Input.AllRoles = new SelectList(await _db.GetAllRolesAsync(), "Name", "Name");
 
-           
-            if (user is not null)
+            var userFromDb = await _userManager.FindByIdAsync(id);
+
+            var type = userFromDb.GetType().Name;
+
+            switch (type)
             {
-                //var roleResult = await _userManager.IsInRoleAsync(user, id);
+                case nameof(StudentUser):
+                    var castedStudent = userFromDb as StudentUser;
+                    Input.Name = castedStudent.Name;
+                    break;
+                case nameof(AdminUser):
+                    var castedAdmin = userFromDb as AdminUser;
+                    Input.Name = castedAdmin.Name;
+                    break;
+                case nameof(TeacherUser):
+                    var castedTeacher = userFromDb as TeacherUser;
+                    Input.Name = castedTeacher.Name;
+                    break;
+            }
+           
+            if (userFromDb is not null)
+            {
+                //var roleResult = await _userManager.IsInRoleAsync(userFromDb, id);
                 //Input.CurrentRole = roleResult.
+                Input.CurrentRoleName = await _db.GetUserRoleOrNullAsync(userFromDb.Id);
             }
 
-            Input.Name = Students.Name;
-
-
-
-
-
+            //Input.Name = Students.Name;
         }
 
-        public async Task<IActionResult> OnPostAsync(StudentUser student)
+        public async Task<IActionResult> OnPostAsync(string id)
         {
-
-            if (!ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(Input.Name) && string.IsNullOrWhiteSpace(Input.CurrentRoleName))
             {
+                ModelState.AddModelError(string.Empty, "Name or Role is empty");
                 return Page();
             }
-            var result = await _db.UpdateStudent(student);
+
+            var result = await _db.UpdateStudent(id, Input.Name, Input.CurrentRoleName);
 
             if (result)
                 return RedirectToPage("AllStudents");
-            else
-            {
-                ModelState.AddModelError(string.Empty, "User not created");
-                return Page();
-            }
+
+            return Page();
+            
+
+
+
+
+            //var userFromDb = await _userManager.FindByIdAsync(id);
+
+            //var type = userFromDb.GetType().Name;
+
+            //if (userFromDb is not null)
+            //{
+
+
+
+                //switch (type)
+                //{
+                //    case nameof(StudentUser):
+                //        var castedStudent = userFromDb as StudentUser;
+                //        Input.Name = castedStudent.Name;
+                //        if (castedStudent is not null)
+                //        {
+                //            var result = await _db.UpdateUser(castedStudent)
+                //        }
+                //        break;
+                //    case nameof(AdminUser):
+                //        var castedAdmin = userFromDb as AdminUser;
+                //        Input.Name = castedAdmin.Name;
+                //        break;
+                //    case nameof(TeacherUser):
+                //        var castedTeacher = userFromDb as TeacherUser;
+                //        Input.Name = castedTeacher.Name;
+                //        break;
+                //}
+
+            //}
+
+
+            //var result = await _db.UpdateStudent(student);
+
+            //if (result)
+            //    return RedirectToPage("AllStudents");
+            //else
+            //{
+            //    ModelState.AddModelError(string.Empty, "User not created");
+            //    return Page();
+            //}
         }
     }
 }
