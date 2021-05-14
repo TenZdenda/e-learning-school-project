@@ -1,29 +1,38 @@
-﻿@{
-    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
-    {
-        Layout = (string)parentLayout;
-    }
-    else
-    {
-        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
-    }
-}
+﻿@using SchoolProject2.Utility
 
-<h2>Manage your account</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SchoolProject2</title>
 
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            <partial name="_ManageNav" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="p-10 space-x-10">
+        <div class="flex justify-between">
+            <div>
+                <h1 class="text-3xl font-bold">Manage your account</h1>
+            </div>
+            <div>
+                <button class="bg-gray-100 hover:bg-gray-300 text-gray-400 hover:text-gray-600 font-semibold py-2 px-6 rounded mx-auto md:mx-0 my-4 md:my-0 block focus:outline-none text-center">
+                    Back to admin panel
+                </button>
+            </div>
         </div>
-        <div class="col-md-9">
-            @RenderBody()
+        <div class="flex">
+            <div width="w-96">
+                <partial name="_ManageNav" />
+            </div>
+            <div class="flex-1">
+                @RenderBody()
+            </div>
         </div>
     </div>
-</div>
+    
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
-@section Scripts {
-    @RenderSection("Scripts", required: false)
-}
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
