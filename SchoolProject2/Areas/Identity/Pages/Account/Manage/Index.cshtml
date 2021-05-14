@@ -5,42 +5,40 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h4>@ViewData["Title"]</h4>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
-    <div class="col-md-6">
+    <div class="px-10 md:px-0 w-full md:w-96">
+        <div class="mb-12">
+            <h1 class="text-3xl font-bold">Profile page</h1>
+        </div>
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
+                <input asp-for="Username" placeholder="Your name" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" disabled />
             </div>
             <div class="form-group">
-                <label asp-for="Input.Name"></label>
-                <input asp-for="Input.Name" class="form-control" />
-                <span asp-validation-for="Input.Name" class="text-danger"></span>
+                <input asp-for="Input.Name" placeholder="Your name" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="Input.Name" class="text-red-600"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                <input asp-for="Input.PhoneNumber" placeholder="Your phone number" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-red-600"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <input asp-for="Input.Email" placeholder="Your email" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="Input.Email" class="text-red-600"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.AreaCodeAndTown"></label>
-                <input asp-for="Input.AreaCodeAndTown" class="form-control" />
-                <span asp-validation-for="Input.AreaCodeAndTown" class="text-danger"></span>
+                <input asp-for="Input.AreaCodeAndTown" placeholder="Your area code and town" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="Input.AreaCodeAndTown" class="text-red-600"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.RoadNameAndNumber"></label>
-                <input asp-for="Input.RoadNameAndNumber" class="form-control" />
-                <span asp-validation-for="Input.RoadNameAndNumber" class="text-danger"></span>
+                <input asp-for="Input.RoadNameAndNumber" placeholder="Your road name and number" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="Input.RoadNameAndNumber" class="text-red-600"></span>
             </div>
-            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+            <div class="form-group">
+                <button id="update-profile-button" type="submit" class="bg-purple-600 hover:bg-purple-800 text-white py-3 text-center w-full font-bold mx-auto block rounded mt-10">Save</button>
+            </div>
         </form>
     </div>
 </div>
