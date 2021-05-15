@@ -31,5 +31,10 @@ namespace SchoolProject2.Data.Repository
         Task<bool> DeleteCourse(int id);
         Task<bool> UpdateCourse(Course course);
 
+        //Schedule        
+        Task<IEnumerable<Schedule>> GetAllSchedules();
+        bool AddSchedule(Schedule schedule);
+        Task<bool> DeleteSchedule(int id);
+        Task<bool> UpdateSchedule(Course course);
     }
 }

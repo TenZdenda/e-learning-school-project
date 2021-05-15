@@ -19,5 +19,6 @@ namespace SchoolProject2.Data
         public DbSet<TeacherUser> TeacherUsers { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
     }
 }
