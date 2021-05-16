@@ -287,7 +287,7 @@ namespace SchoolProject2.Data.EFRepository
         //Schedules
         public async Task<IEnumerable<Schedule>> GetAllSchedules()
         {
-            var result = await context.Schedules.ToListAsync();
+            var result = await context.Schedules.Include(s => s.Course).ToListAsync();
             return result;
         }
 

@@ -1,0 +1,42 @@
+﻿@page
+@model SchoolProject2.Areas.Admin.Pages.CreateScheduleModel
+
+<div>
+    <div class="mb-10 flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold">Add new Schedule</h1>
+            <p class="text-gray-500">Fill the form</p>
+        </div>
+    </div>
+
+    <form class="max-w-2xl" method="post">
+        <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 md:gap-y-5">
+            <div>
+                <select asp-for="@Model.Schedule.DayOfWeek" asp-items="Html.GetEnumSelectList<DayOfWeek>()">
+                    <option value="">Choose a day</option>
+                </select>
+                @*<input asp-for="@Model.Schedule.DayOfWeek" placeholder="Course name" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+            <span asp-validation-for="@Model.Course.CourseName" class="text-danger"></span>*@
+            </div>
+            <div>Start Time
+                <input asp-for="@Model.Schedule.StartTime" placeholder="StartTime" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="@Model.Schedule.StartTime" class="text-danger"></span>
+            </div>
+            <div>End Time
+                <input asp-for="@Model.Schedule.EndTime" placeholder="EndTime" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="@Model.Schedule.EndTime" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <div class="flex justify-end items-center gap-6 mt-16">
+                <a asp-page="AllSchedules" class="text-gray-500 hover:text-gray-900">Back to list</a>
+                <button name="submit"
+                        type="submit"
+                        class="px-10 py-4 bg-pink-500 hover:bg-pink-800 text-white font-semibold rounded">
+                    Create New Schedule
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
