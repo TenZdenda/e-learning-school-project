@@ -26,6 +26,15 @@
                 <input asp-for="@Model.Schedule.EndTime" placeholder="EndTime" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
                 <span asp-validation-for="@Model.Schedule.EndTime" class="text-danger"></span>
             </div>
+            <div>
+                <select asp-for="@Model.Schedule.Course.CourseId">                    
+                    <option value="">Select One Course</option>
+                    @foreach (var course in Model.Courses)
+                    {
+                        <option value="@course.CourseId">@course.CourseName</option>
+                    }
+                </select>               
+            </div>
         </div>
         <div>
             <div class="flex justify-end items-center gap-6 mt-16">

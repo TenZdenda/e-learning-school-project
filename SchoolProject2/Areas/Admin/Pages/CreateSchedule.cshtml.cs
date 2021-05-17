@@ -16,13 +16,16 @@ namespace SchoolProject2.Areas.Admin.Pages
         [BindProperty]
         public Schedule Schedule { get; set; }
 
+        public IEnumerable<Course> Courses { get; set; }
+
         public CreateScheduleModel(IAdminService db)
         {
             _db = db;
         }
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-
+            Courses = await _db.GetAllCourses();
+            return Page();
         }
 
         public IActionResult OnPost()
