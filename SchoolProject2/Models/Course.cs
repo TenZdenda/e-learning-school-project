@@ -13,10 +13,9 @@ namespace SchoolProject2.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CourseId { get; set; }
-        
-        [Required]
+                
         [MaxLength(50)]
-        public string CourseName { get; set; }
+        public string? CourseName { get; set; }
 
         public int Duration { get; set; }
 
@@ -24,6 +23,8 @@ namespace SchoolProject2.Models
         public string? TeacherUserId { get; set; }
 
         public virtual TeacherUser Teacher { get; set; }
+
+        public virtual ICollection<Schedule> Schedules { get; set; }
 
         //public virtual ICollection<StudentUser> StudentUsers { get; set; }
     }
