@@ -21,6 +21,10 @@
                 <span asp-validation-for="@Model.Student.Email" class="text-danger"></span>
             </div>
             <div>
+                <input asp-for="@Model.Student.PhoneNumber" placeholder="Student's phone number" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="@Model.Student.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div>
                 <input asp-for="@Model.Student.Password" placeholder="Student's password" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
                 <span asp-validation-for="@Model.Student.Password" class="text-danger"></span>
             </div>

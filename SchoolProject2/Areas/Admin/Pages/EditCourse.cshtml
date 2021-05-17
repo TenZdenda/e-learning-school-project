@@ -1,11 +1,11 @@
-﻿@page "/Admin/EditTeacher/{id}"
-@model SchoolProject2.Areas.Admin.Pages.EditTeacherModel
+﻿@page "/Admin/EditCourse/{id}"
+@model SchoolProject2.Areas.Admin.Pages.EditCourseModel
 @{
 }
 <div>
     <div class="mb-10 flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold">Edit student</h1>
+            <h1 class="text-2xl font-bold">Edit course</h1>
             <p class="text-gray-500">Fill the form</p>
         </div>
     </div>
@@ -14,12 +14,12 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 md:gap-y-5">
             <div>
-                <input asp-for="Input.Name" placeholder="Teacher's name" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
-                <span asp-validation-for="Input.Name" class="text-danger"></span>
+                <input asp-for="Course.CourseName" placeholder="Courses's name" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="Course.CourseName" class="text-danger"></span>
             </div>
             <div>
-                <select asp-for="Input.CurrentRoleName" asp-items="Model.Input.AllRoles" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100"></select>
-                <span asp-validation-for="Input.CurrentRoleName" class="text-danger"></span>
+                <input asp-for="Course.Duration"  class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100"></>
+                <span asp-validation-for="Course.Duration" class="text-danger"></span>
             </div>
         </div>
         <div>
@@ -28,7 +28,7 @@
                 <button name="submit"
                         type="submit"
                         class="px-10 py-4 bg-pink-500 hover:bg-pink-800 text-white font-semibold rounded">
-                    Update teacher
+                    Update course
                 </button>
             </div>
         </div>
@@ -36,5 +36,5 @@
 </div>
 
 <div>
-    <a asp-page="AllTeachers">Back to List</a>
+    <a asp-page="AllCourses">Back to List</a>
 </div>

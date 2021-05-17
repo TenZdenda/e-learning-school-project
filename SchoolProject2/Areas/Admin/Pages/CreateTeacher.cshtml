@@ -1,4 +1,4 @@
-﻿@page
+﻿@page   
 @model SchoolProject2.Areas.Admin.Pages.CreateTeacherModel
 
 <div>
@@ -19,6 +19,10 @@
             <div>
                 <input asp-for="@Model.Teacher.Email" placeholder="Teacher's email" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
                 <span asp-validation-for="@Model.Teacher.Email" class="text-danger"></span>
+            </div>
+            <div>
+                <input asp-for="@Model.Teacher.PhoneNumber" placeholder="Teacher's phone number" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="@Model.Teacher.PhoneNumber" class="text-danger"></span>
             </div>
             <div>
                 <input asp-for="@Model.Teacher.Password" placeholder="Teacher's password" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />

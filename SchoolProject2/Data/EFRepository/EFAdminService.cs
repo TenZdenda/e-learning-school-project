@@ -32,7 +32,8 @@ namespace SchoolProject2.Data.EFRepository
                 {
                     UserName = student.Email,
                     Email = student.Email,
-                    Name = student.Name
+                    Name = student.Name,
+                    PhoneNumber = student.PhoneNumber
                 };
                 var result = await _userManager.CreateAsync(user, student.Password);
 
@@ -162,7 +163,8 @@ namespace SchoolProject2.Data.EFRepository
                 {
                     UserName = teacher.Email,
                     Email = teacher.Email,
-                    Name = teacher.Name
+                    Name = teacher.Name,
+                    PhoneNumber = teacher.PhoneNumber
                 };
                 var result = await _userManager.CreateAsync(user, teacher.Password);
 
@@ -240,9 +242,18 @@ namespace SchoolProject2.Data.EFRepository
             return true;
         }
 
-        public Task<bool> UpdateCourse(Course course)
+        public async Task<bool> UpdateCourseAsync(Course course)
         {
-            throw new NotImplementedException();
+            //var result = context.Courses.Where(x=>x.CourseName.Contains();
+
+            //if(result != null)
+            //{
+            //    result.CourseId = course.CourseId;
+            //    result.CourseName = course.CourseName;
+            //    result.Duration = course.Duration;
+            //    await context.SaveChangesAsync();
+            //}
+            return true;
         }
 
         public async Task<List<IdentityRole>> GetAllRolesAsync()
@@ -260,6 +271,12 @@ namespace SchoolProject2.Data.EFRepository
                     return role.Name;
             }
             return null;
+        }
+
+        public async Task<bool> GetCourseByIdAsync(int id)
+        {
+            var result = await context.Courses.FindAsync(id);
+            return true;
         }
     }
 }

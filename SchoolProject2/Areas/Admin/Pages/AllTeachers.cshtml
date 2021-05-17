@@ -33,7 +33,7 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                @*<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>*@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone Number</th>
@@ -48,12 +48,12 @@
                                 @foreach (var item in Model.Teachers)
                                 {
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">  @item.Id</td>
+                                        @*<td class="px-6 py-4 whitespace-nowrap">  @item.Id</td>*@
                                         <td class="px-6 py-4 whitespace-nowrap">  @item.Name  </td>
                                         <td class="px-6 py-4 whitespace-nowrap">  @item.Email </td>
                                         <td class="px-6 py-4 whitespace-nowrap">  @item.PhoneNumber </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <button class="hover:text-black focus:outline-none" asp-page="EditStudent" asp-route-id="@item.Id">
+                                            <a class="hover:text-black focus:outline-none" asp-page="EditTeacher" asp-route-id="@item.Id">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      class="h-5 w-5"
                                                      fill="none"
@@ -64,7 +64,7 @@
                                                           stroke-width="2"
                                                           d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                 </svg>
-                                            </button>
+                                            </a>
                                             <button class="hover:text-black focus:outline-none" type="submit" asp-route-id="@item.Id">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      class="h-5 w-5"
