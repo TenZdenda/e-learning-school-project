@@ -307,7 +307,6 @@ namespace SchoolProject2.Data.EFRepository
             return null;
         }
 
-
         public async Task<Course> GetCourseByIdOrNullAsync(int id)
         {
             var result = await context.Courses.FindAsync(id);
@@ -317,9 +316,9 @@ namespace SchoolProject2.Data.EFRepository
             //    return null;
             //else
             //    return result;
-
-
         }
+
+
         //Schedules
         public async Task<IEnumerable<Schedule>> GetAllSchedules()
         {
@@ -330,28 +329,62 @@ namespace SchoolProject2.Data.EFRepository
         public bool AddSchedule(Schedule schedule)
         {
             if (schedule != null)
-            {
-                //schedule = new Schedule
-                //{
-                //    DayOfWeek = schedule.DayOfWeek,
-                //    Duration = course.Duration
-                //};
-
+            {               
                 context.Schedules.Add(schedule);
                 context.SaveChanges();
                 return true;
             }
             return false;
         }
-
-        public Task<bool> DeleteSchedule(int id)
+            
+        public async Task<Schedule> GetScheduleByIdOrNullAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await context.Schedules.FindAsync(id);
+            return (result is null) ? null : result;
         }
 
-        public Task<bool> UpdateSchedule(Course course)
+        public async Task<bool> DeleteSchedule(int id)
         {
-            throw new NotImplementedException();
+            if (id == 0)
+                return false;
+
+            var ScheduleFromDb = await context.Schedules.FindAsync(id);
+
+            if (ScheduleFromDb == null)
+                return false;
+
+            context.Remove(ScheduleFromDb);
+
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> UpdateScheduleAsync(Schedule schedule)
+        {
+            try
+            {
+                if (schedule != null)
+                {
+                    Schedule scheduleToUpdate = await context.Schedules.FindAsync(schedule.ScheduleId);
+
+                    if (scheduleToUpdate is null)
+                        return false;
+
+                    scheduleToUpdate.DayOfWeek = schedule.DayOfWeek;
+                    scheduleToUpdate.StartTime = schedule.StartTime;
+                    scheduleToUpdate.EndTime = schedule.EndTime;
+                    scheduleToUpdate.CourseId = schedule.CourseId;
+
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return false;
 
         }
 

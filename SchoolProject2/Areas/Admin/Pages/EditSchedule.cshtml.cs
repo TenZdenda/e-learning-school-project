@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SchoolProject2.Data.Repository;
@@ -13,24 +12,26 @@ using SchoolProject2.Utility;
 namespace SchoolProject2.Areas.Admin.Pages
 {
     [Authorize(Roles = SD.AdminUser)]
-    public class EditCourseModel : PageModel
+    public class EditScheduleModel : PageModel
     {
         private readonly IAdminService _db;
 
-        public EditCourseModel(IAdminService db)
+        public EditScheduleModel(IAdminService db)
         {
             _db = db;
-            
+
         }
 
         [BindProperty(SupportsGet = true)]
-        public Course Course { get; set; }
-               
-        public async Task<IActionResult> OnGetAsync(int id)
-        {            
-            Course = await _db.GetCourseByIdOrNullAsync(id);
-            
-            return Page();
+        public Schedule Schedule { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public IEnumerable<Course> Courses { get; set; }
+
+        public async Task OnGetAsync(int id)
+        {
+            Schedule = await _db.GetScheduleByIdOrNullAsync(id);
+            Courses = await _db.GetAllCourses();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -38,14 +39,14 @@ namespace SchoolProject2.Areas.Admin.Pages
             if (!ModelState.IsValid)
                 return Page();
 
-            var result = await _db.UpdateCourseAsync(Course);
+            var result = await _db.UpdateScheduleAsync(Schedule);
 
             if (result)
-                TempData["SM"] = $"Course {Course.CourseName} has been successfully edited";
+                TempData["SM"] = $"Schedule {Schedule.ScheduleId} has been successfully edited";
             else
-                TempData["FM"] = $"Course {Course.CourseName} editing failed";
+                TempData["FM"] = $"Schedule {Schedule.ScheduleId} editing failed";
 
-            return RedirectToPage("AllCourses");
+            return RedirectToPage("AllSchedules");
 
         }
     }
