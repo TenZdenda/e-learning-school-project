@@ -10,19 +10,17 @@ namespace SchoolProject2.Models
 {
     public class Course
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CourseId { get; set; }
                 
+        [Required]
         [MaxLength(50)]
-        public string? CourseName { get; set; }
-
+        public string CourseName { get; set; }
+        [Required]
         public int Duration { get; set; }
-
-        [ForeignKey("TeacherUser")]
-        public string? TeacherUserId { get; set; }
-
-        public virtual TeacherUser Teacher { get; set; }
+        
+        public string TeacherUserId { get; set; }
+        [ForeignKey(nameof(TeacherUserId))]
+        public virtual TeacherUser TeacherUser { get; set; }
 
         public virtual ICollection<Schedule> Schedules { get; set; }
 

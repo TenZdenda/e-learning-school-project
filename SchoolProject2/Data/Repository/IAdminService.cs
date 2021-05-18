@@ -30,7 +30,7 @@ namespace SchoolProject2.Data.Repository
         bool AddCourse(Course course);
         Task<bool> DeleteCourse(int id);
         Task<bool> UpdateCourseAsync(Course course);
-        Task<bool> GetCourseByIdAsync(int id);
+        Task<Course> GetCourseByIdOrNullAsync(int id);
 
         //Schedule        
         Task<IEnumerable<Schedule>> GetAllSchedules();

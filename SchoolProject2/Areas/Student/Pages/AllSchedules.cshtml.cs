@@ -2,23 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SchoolProject2.Data.Repository;
 using SchoolProject2.Models;
-using SchoolProject2.Utility;
 
-namespace SchoolProject2.Areas.Admin.Pages
+namespace SchoolProject2.Areas.Student.Pages
 {
-    [Authorize(Roles = SD.AdminUser)]
     public class AllSchedulesModel : PageModel
     {
-        private readonly IAdminService _db;
+        private readonly IStudentService _db;
 
         public IEnumerable<Schedule> Schedules { get; set; }
 
-        public AllSchedulesModel(IAdminService db)
+        public AllSchedulesModel(IStudentService db)
         {
             _db = db;
         }
@@ -29,15 +26,7 @@ namespace SchoolProject2.Areas.Admin.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
-        {
-            var result = await _db.DeleteSchedule(id);
-            if (result)
-            {
-                Schedules = await _db.GetAllSchedules();
-                return Page();
-            }
-            return Page();
-        }
+        
     }
 }
+

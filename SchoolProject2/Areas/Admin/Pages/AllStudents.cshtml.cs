@@ -13,6 +13,7 @@ using SchoolProject2.Utility;
 
 namespace SchoolProject2.Areas.Admin.Pages
 {
+    [Authorize(Roles = SD.AdminUser)]
     public class AllStudentsModel : PageModel
     {
         private readonly IAdminService _db;

@@ -244,22 +244,22 @@ namespace SchoolProject2.Data.EFRepository
         }
 
 
+        //public async Task<bool> UpdateCourseAsync(Course course)
+        //{
+        //    //var result = context.Courses.Where(x=>x.CourseName.Contains();
+
+        //    //if(result != null)
+        //    //{
+        //    //    result.CourseId = course.CourseId;
+        //    //    result.CourseName = course.CourseName;
+        //    //    result.Duration = course.Duration;
+        //    //    await context.SaveChangesAsync();
+        //    //}
+        //    return true;
+
+
+        //}
         public async Task<bool> UpdateCourseAsync(Course course)
-        {
-            //var result = context.Courses.Where(x=>x.CourseName.Contains();
-
-            //if(result != null)
-            //{
-            //    result.CourseId = course.CourseId;
-            //    result.CourseName = course.CourseName;
-            //    result.Duration = course.Duration;
-            //    await context.SaveChangesAsync();
-            //}
-            return true;
-
-            
-        }
-        public async Task<bool> UpdateCourse(Course course)
         {
             try
             {
@@ -267,13 +267,16 @@ namespace SchoolProject2.Data.EFRepository
                 {
                     Course courseToUpdate = await context.Courses.FindAsync(course.CourseId);
 
+                    if (courseToUpdate is null)
+                        return false;
+
                     courseToUpdate.CourseName = course.CourseName;
                     courseToUpdate.Duration = course.Duration;
-                    courseToUpdate.TeacherUserId = course.TeacherUserId;
-                    courseToUpdate.Teacher = course.Teacher;
-                    courseToUpdate.Schedules = course.Schedules;
+                    // TODO:
+                    //courseToUpdate.TeacherUserId = course.TeacherUserId;
+                    //courseToUpdate.Schedules = course.Schedules;
 
-                    context.SaveChanges();
+                    await context.SaveChangesAsync();
                     return true;
                 }
 
@@ -305,10 +308,15 @@ namespace SchoolProject2.Data.EFRepository
         }
 
 
-        public async Task<bool> GetCourseByIdAsync(int id)
+        public async Task<Course> GetCourseByIdOrNullAsync(int id)
         {
             var result = await context.Courses.FindAsync(id);
-            return true;
+            return (result is null) ? null : result;
+
+            //if (result is null)
+            //    return null;
+            //else
+            //    return result;
 
 
         }
@@ -328,7 +336,7 @@ namespace SchoolProject2.Data.EFRepository
                 //    DayOfWeek = schedule.DayOfWeek,
                 //    Duration = course.Duration
                 //};
-                
+
                 context.Schedules.Add(schedule);
                 context.SaveChanges();
                 return true;

@@ -1,16 +1,17 @@
 ﻿@page
-@model SchoolProject2.Areas.Admin.Pages.AllCoursesModel
-
+@model SchoolProject2.Areas.Student.Pages.AllSchedulesModel
+@{
+}
 <div class="mb-10 flex items-center justify-between">
     <div>
-        <h1 class="text-2xl font-bold">Manage your courses</h1>
+        <h1 class="text-2xl font-bold">Manage your Schedules</h1>
         <p class="text-gray-500">Create, edit or just delete them</p>
     </div>
     <div>
-        <a asp-page="CreateCourse"
+        <a asp-page="CreateSchedule"
            class="focus:outline-none text-gray-500 hover:text-gray-900">
             <div class="flex items-center gap-5">
-                <p class="font-semibold">Create new course</p>
+                <p class="font-semibold">Create new Schedule</p>
                 <svg xmlns="http://www.w3.org/2000/svg"
                      class="h-5 w-5"
                      fill="none"
@@ -25,20 +26,6 @@
         </a>
     </div>
 </div>
-
-@if (TempData["SM"] is not null)
-{
-    <div>
-        <h2>@TempData["SM"]</h2>
-    </div>
-}
-@if (TempData["FM"] is not null)
-{
-    <div>
-        <h2>@TempData["FM"]</h2>
-    </div>
-}
-
 <form method="post">
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -48,26 +35,34 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teacher ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Day Of Week</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Time</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End Time</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
                                 <th scope="col" class="relative px-6 py-3">
                                     <span class="sr-only">Action</span>
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @if (Model.Courses != null)
+                            @if (Model.Schedules != null)
                             {
-                                @foreach (var item in Model.Courses)
+                                @foreach (var item in Model.Schedules)
                                 {
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">  @item.CourseId</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">  @item.CourseName  </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">  @item.Duration </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">  @item.TeacherUserId </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">  @item.ScheduleId</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">  @item.DayOfWeek  </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">  @item.StartTime.TimeOfDay </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">  @item.EndTime.TimeOfDay </td>
+                                        @if (item.Course != null)
+                                        {
+                                            <td class="px-6 py-4 whitespace-nowrap">  @item.Course.CourseName </td>
+}
+                                        else
+                                        {
+                                            <td class="px-6 py-4 whitespace-nowrap">  No Course Assigned </td>
+}
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a class="hover:text-black focus:outline-none" asp-page="EditCourse" asp-route-id="@item.CourseId">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      class="h-5 w-5"
                                                      fill="none"
@@ -78,19 +73,6 @@
                                                           stroke-width="2"
                                                           d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                 </svg>
-                                            </a>
-                                            <button class="hover:text-black focus:outline-none" type="submit" asp-route-id="@item.CourseId">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     class="h-5 w-5"
-                                                     fill="none"
-                                                     viewBox="0 0 24 24"
-                                                     stroke="currentColor">
-                                                    <path stroke-linecap="round"
-                                                          stroke-linejoin="round"
-                                                          stroke-width="2"
-                                                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
                                         </td>
                                     </tr>
                                 }
@@ -103,8 +85,5 @@
     </div>
 </form>
 <div>
-    <a asp-page="Index">Back to Admin Panel</a>
+    <a asp-page="Index">Back to Student Panel</a>
 </div>
-
-
-
