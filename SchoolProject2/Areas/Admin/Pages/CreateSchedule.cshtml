@@ -27,7 +27,7 @@
                 <span asp-validation-for="@Model.Schedule.EndTime" class="text-danger"></span>
             </div>
             <div>
-                <select asp-for="@Model.Schedule.Course.CourseId">                    
+                <select asp-for="@Model.Schedule.CourseId">                    
                     <option value="">Select One Course</option>
                     @foreach (var course in Model.Courses)
                     {

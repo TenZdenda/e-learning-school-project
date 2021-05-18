@@ -328,7 +328,7 @@ namespace SchoolProject2.Data.EFRepository
                 //    DayOfWeek = schedule.DayOfWeek,
                 //    Duration = course.Duration
                 //};
-
+                
                 context.Schedules.Add(schedule);
                 context.SaveChanges();
                 return true;
@@ -346,5 +346,7 @@ namespace SchoolProject2.Data.EFRepository
             throw new NotImplementedException();
 
         }
+
+
     }
 }
