@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SchoolProject2.Data.Repository;
 using SchoolProject2.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SchoolProject2.Data.EFRepository
 {
-    public class EFStudentService
+    public class EFStudentService : IStudentService
     {
         ApplicationDbContext context;
 

@@ -24,6 +24,6 @@ namespace SchoolProject2.Models
 
         public virtual ICollection<Schedule> Schedules { get; set; }
 
-        //public virtual ICollection<StudentUser> StudentUsers { get; set; }
+        public virtual ICollection<StudentUser> StudentUsers { get; set; }
     }
 }

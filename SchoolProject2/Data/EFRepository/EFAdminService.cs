@@ -348,7 +348,7 @@ namespace SchoolProject2.Data.EFRepository
             if (id == 0)
                 return false;
 
-            var ScheduleFromDb = await context.Schedules.FindAsync(id);
+            var ScheduleFromDb = await context.Schedules.Include(x => x.Course).FirstOrDefaultAsync(x => x.ScheduleId == id);
 
             if (ScheduleFromDb == null)
                 return false;

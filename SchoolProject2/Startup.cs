@@ -52,6 +52,7 @@ namespace SchoolProject2
 
             services.AddRazorPages();
             services.AddScoped<IAdminService, EFAdminService>();
+            services.AddScoped<IStudentService, EFStudentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

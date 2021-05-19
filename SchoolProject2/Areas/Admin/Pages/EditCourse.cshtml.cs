@@ -25,7 +25,10 @@ namespace SchoolProject2.Areas.Admin.Pages
 
         [BindProperty(SupportsGet = true)]
         public Course Course { get; set; }
-               
+
+        [BindProperty]
+        public List<StudentUser> Students { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {            
             Course = await _db.GetCourseByIdOrNullAsync(id);
@@ -47,6 +50,15 @@ namespace SchoolProject2.Areas.Admin.Pages
 
             return RedirectToPage("AllCourses");
 
+        }
+
+        public async Task OnPostSearchUser(string userName)
+        {
+            var rawStudentsArr = await _db.GetAllStudents();
+            Students = rawStudentsArr.Where(x =>
+                x.Name.Contains(userName) ||
+                x.Email.Contains(userName)
+            ).ToList();
         }
     }
 }
