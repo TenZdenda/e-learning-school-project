@@ -88,6 +88,11 @@ namespace SchoolProject2.Areas.Admin.Pages
             var result = await _db.UpdateStudent(id, Input.Name, Input.CurrentRoleName);
 
             if (result)
+                TempData["SM"] = $"Teacher {Input.Name} has been successfully edited";
+            else
+                TempData["FM"] = $"Teacher {Input.Name} editing failed";
+
+            if (result)
                 return RedirectToPage("AllTeachers");
 
             return Page();

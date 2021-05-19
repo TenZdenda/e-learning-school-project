@@ -37,6 +37,11 @@ namespace SchoolProject2.Areas.Admin.Pages
             var result = await _db.AddTeacher(Teacher);
 
             if (result)
+                TempData["SM"] = $"Teacher {Teacher.Name} has been successfully created";
+            else
+                TempData["FM"] = $"Teacher {Teacher.Name} creation failed";
+
+            if (result)
                 return RedirectToPage("AllTeachers");
             else
             {

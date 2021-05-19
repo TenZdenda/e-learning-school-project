@@ -37,6 +37,11 @@ namespace SchoolProject2.Areas.Admin.Pages
             var result = _db.AddCourse(Course);
 
             if (result)
+                TempData["SM"] = $"Course {Course.CourseName} has been successfully edited";
+            else
+                TempData["FM"] = $"Course {Course.CourseName} editing failed";
+
+            if (result)
                 return RedirectToPage("AllCourses");
             else
             {

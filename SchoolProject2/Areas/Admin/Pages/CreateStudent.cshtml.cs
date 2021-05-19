@@ -38,6 +38,11 @@ namespace SchoolProject2.Areas.Admin.Pages
             var result = await _db.AddStudent(Student);
 
             if (result)
+                TempData["SM"] = $"Student {Student.Name} has been successfully created";
+            else
+                TempData["FM"] = $"Student {Student.Name} editing failed";
+
+            if (result)
                 return RedirectToPage("AllStudents");
             else
             {

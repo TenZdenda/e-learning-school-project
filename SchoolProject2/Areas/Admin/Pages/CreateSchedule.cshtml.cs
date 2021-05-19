@@ -40,6 +40,11 @@ namespace SchoolProject2.Areas.Admin.Pages
             var result = _db.AddSchedule(Schedule);
 
             if (result)
+                TempData["SM"] = $"Schedule for course {Schedule.Course} has been successfully edited";
+            else
+                TempData["FM"] = $"Schedule for course {Schedule.Course} editing failed";
+
+            if (result)
                 return RedirectToPage("AllSchedules");
             else
             {
