@@ -10,26 +10,99 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <div class="p-10 space-x-10">
-        <div class="flex justify-between mb-10">
-            <div>
-                <h1 class="text-3xl font-bold">Manage your account</h1>
+    <div class="h-screen flex">
+        <!-- Fixed sidebar -->
+        <div class="w-64 bg-gray-900 rounded-r-lg text-gray-100 px-5 py-8 space-y-16 absolute inset-y-0 left-0 transform md:relative md:translate-x-0 transition duration-200 ease-in-out z-10">
+            <div class="flex justify-between px-4">
+                <div class="flex items-center space-x-5">
+                    <div class="bg-gray-700 px-3 py-2 rounded-2xl">🚀</div>
+                    <span class="text-xl font-bold">LOGO</span>
+                </div>
+                <button class="focus:outline-none md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-6 w-6"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
-            <div>
-                <a asp-area="Admin" asp-page="/Index" class="bg-gray-300 hover:bg-gray-600 text-gray-400 hover:text-gray-600 font-semibold py-2 px-6 rounded mx-auto md:mx-0 my-4 md:my-0 block focus:outline-none text-center">
-                    Back to admin panel
+            <nav class="space-y-4">
+                <a asp-page="./Index" class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="font-semibold text-md">Profile</span>
                 </a>
-            </div>
+                <a asp-page="./Email" class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                    </svg>
+                    <span class="font-semibold text-md">Email</span>
+                </a>
+                <a asp-page="./ChangePassword" class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                    </svg>
+                    <span class="font-semibold text-md">Password</span>
+                </a>
+                <a asp-page="./TwoFactorAuthentication" class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    <span class="font-semibold text-md">Two-factor authentication</span>
+                </a>
+                <a asp-page="./PersonalData" class="flex items-center space-x-5 rounded transition duration-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-100 hover:shadow-xl px-4 py-2.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                    </svg>
+                    <span class="font-semibold text-md">Personal data</span>
+                </a>
+            </nav>
         </div>
-        <div class="flex">
-            <div width="w-96">
-                <partial name="_ManageNav" />
-            </div>
-            <div class="flex-1">
-                <div class="flex h-screen">
-                    <div class="mx-auto">
-                        @RenderBody()
+        <!-- Scroll wrapper -->
+        <div class="flex-1 flex overflow-hidden">
+            <!-- Scrollable container -->
+            <div class="flex-1 overflow-y-scroll">
+                <div class="flex items-center justify-between md:justify-end px-6 py-4">
+                    <button class="focus:outline-none md:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="h-6 w-6"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M4 6h16M4 12h16M4 18h7" />
+                        </svg>
+                    </button>
+                    <a class="flex items-center p-2 hover:bg-gray-100 rounded-full">
+                        <img class="h-10 w-10 md:h-12 md:w-12 rounded-full"
+                             src="https://avatars.githubusercontent.com/u/39481226?v=4"
+                             alt="Profile picture" />
+                        <div class="ml-4 hidden md:block">
+                            <p class="font-bold">@User.Identity.Name</p>
+                            <p class="text-gray-500">Email address</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between mb-10">
+                        <div>
+                            <h1 class="text-3xl font-bold">Manage your account</h1>
+                        </div>
+                        <div>
+                            <a asp-area="Admin" asp-page="/Index" class="bg-black hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded mx-auto md:mx-0 my-4 md:my-0 block focus:outline-none text-center">
+                                Back to admin panel
+                            </a>
+                        </div>
                     </div>
+                    @RenderBody()
                 </div>
             </div>
         </div>
