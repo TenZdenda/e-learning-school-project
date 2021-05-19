@@ -17,6 +17,8 @@ namespace SchoolProject2.Areas.Admin.Pages
         private readonly IAdminService _db;
 
         public IEnumerable<Schedule> Schedules { get; set; }
+        
+        public Schedule Schedule { get; set; }
 
         public AllSchedulesModel(IAdminService db)
         {
@@ -32,6 +34,12 @@ namespace SchoolProject2.Areas.Admin.Pages
         public async Task<IActionResult> OnPostAsync(int id)
         {
             var result = await _db.DeleteSchedule(id);
+
+            if (result)
+                TempData["SM"] = $"Schedule {Schedule.Course} has been successfully deleted";
+            else
+                TempData["FM"] = $"Schedule {Schedule.Course} has been failed to delete";
+
             if (result)
             {
                 Schedules = await _db.GetAllSchedules();

@@ -32,6 +32,12 @@ namespace SchoolProject2.Areas.Admin.Pages
         public async Task<IActionResult> OnPostAsync(int id)
         {
             var result = await _db.DeleteCourse(id);
+
+            if (result)
+                TempData["SM"] = $"Course has been successfully deleted";
+            else
+                TempData["FM"] = $"Course has been failed to delete";
+
             if (result)
             {
                 Courses = await _db.GetAllCourses();
