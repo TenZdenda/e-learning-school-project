@@ -25,6 +25,20 @@
         </a>
     </div>
 </div>
+
+@if (TempData["SM"] is not null)
+{
+    <div>
+        <h2>@TempData["SM"]</h2>
+    </div>
+}
+@if (TempData["FM"] is not null)
+{
+    <div>
+        <h2>@TempData["FM"]</h2>
+    </div>
+}
+
 <form method="post">
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

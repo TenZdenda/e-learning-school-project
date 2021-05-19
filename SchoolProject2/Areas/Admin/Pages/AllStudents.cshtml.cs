@@ -34,6 +34,12 @@ namespace SchoolProject2.Areas.Admin.Pages
         public async Task<IActionResult> OnPostAsync(string id)
         {
             var result = await _db.DeleteStudent(id);
+
+            if (result)
+               TempData["SM"] = $"Student has been successfully deleted";
+            else
+                TempData["FM"] = $"Student has been failed to delete";
+
             if (result)
             {
                 Students = await _db.GetAllStudents();
