@@ -22,6 +22,10 @@ namespace SchoolProject2.Models
         [ForeignKey(nameof(TeacherUserId))]
         public virtual TeacherUser TeacherUser { get; set; }
 
+        //public string StudentUserId { get; set; }
+        //[ForeignKey(nameof(StudentUserId))]
+        //public virtual StudentUser StudentUser { get; set; }
+
         public virtual ICollection<Schedule> Schedules { get; set; }
 
         public virtual ICollection<StudentUser> StudentUsers { get; set; }
