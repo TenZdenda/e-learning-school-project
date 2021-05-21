@@ -76,7 +76,7 @@ namespace SchoolProject2.Data.EFRepository
         }
 
 
-        public async Task<bool> UpdateStudent(string id, string newName, string newRole)
+        public async Task<bool> UpdateUserRole(string id, string newName, string newRole)
         {
             var userFromDb = await context.Users.FindAsync(id);
 
@@ -197,12 +197,6 @@ namespace SchoolProject2.Data.EFRepository
             await context.SaveChangesAsync();
             return true;
         }
-
-        public Task<bool> UpdateTeacher()
-        {
-            throw new NotImplementedException();
-        }
-
         // COURSES
         public async Task<IEnumerable<Course>> GetAllCourses()
         {
@@ -213,13 +207,7 @@ namespace SchoolProject2.Data.EFRepository
         public bool AddCourse(Course course)
         {
             if (course != null)
-            {
-                //course = new Course
-                //{
-                //    CourseName = course.CourseName,
-                //    Duration = course.Duration                   
-                //};
-
+            { 
                 context.Courses.Add(course);
                 context.SaveChanges();
                 return true;
@@ -243,22 +231,6 @@ namespace SchoolProject2.Data.EFRepository
             return true;
         }
 
-
-        //public async Task<bool> UpdateCourseAsync(Course course)
-        //{
-        //    //var result = context.Courses.Where(x=>x.CourseName.Contains();
-
-        //    //if(result != null)
-        //    //{
-        //    //    result.CourseId = course.CourseId;
-        //    //    result.CourseName = course.CourseName;
-        //    //    result.Duration = course.Duration;
-        //    //    await context.SaveChangesAsync();
-        //    //}
-        //    return true;
-
-
-        //}
         public async Task<bool> UpdateCourseAsync(Course course)
         {
             try
@@ -311,11 +283,6 @@ namespace SchoolProject2.Data.EFRepository
         {
             var result = await context.Courses.FindAsync(id);
             return (result is null) ? null : result;
-
-            //if (result is null)
-            //    return null;
-            //else
-            //    return result;
         }
 
 
@@ -388,6 +355,42 @@ namespace SchoolProject2.Data.EFRepository
 
         }
 
+        public async Task<Course> GetCourseAndStudentByIdAsync(int id)
+        {
+            var result = await context.Courses.Include(x => x.StudentUsers).FirstOrDefaultAsync(x => x.CourseId == id);
+            return result;
+        }
 
+        public async Task<bool> UpdateCourseAsync(Course course, string id)
+        {
+            try
+            {
+                if (course != null)
+                {
+                    Course courseToUpdate = await context.Courses.FindAsync(course.CourseId);
+                    if (courseToUpdate is null)
+                        return false;
+
+                    StudentUser studentFromDb = await context.StudentUsers.FindAsync(id);
+                    if (studentFromDb is null)
+                        return false;
+
+                    courseToUpdate.StudentUsers = new List<StudentUser>();
+
+                    courseToUpdate.CourseName = course.CourseName;
+                    courseToUpdate.Duration = course.Duration;
+                    courseToUpdate.StudentUsers.Add(studentFromDb);
+
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return false;
+        }
     }
 }

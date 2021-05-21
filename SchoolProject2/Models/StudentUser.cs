@@ -14,6 +14,16 @@ namespace SchoolProject2.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
+        //[Required]
+        //[MaxLength(50)]
+        //[NotMapped] //ignore
+        //public string Email { get; set; }
+
+        //[Required]
+        //[MaxLength(50)]
+        //[NotMapped] //ignore
+        //public string PhoneNumber { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         [NotMapped] //ignore

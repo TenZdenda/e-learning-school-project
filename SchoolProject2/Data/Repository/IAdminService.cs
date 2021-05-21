@@ -12,7 +12,7 @@ namespace SchoolProject2.Data.Repository
         Task<IEnumerable<StudentUser>> GetAllStudents();
         Task<bool> AddStudent(StudentUser student);
         Task<bool> DeleteStudent(string id);
-        Task<bool> UpdateStudent(string id, string newName, string newRole);
+        Task<bool> UpdateUserRole(string id, string newName, string newRole);
         Task<StudentUser> GetStudent(string id);
         Task<IdentityRole> GetUserRoleOrNullAsync(IdentityUser user);
 
@@ -23,14 +23,15 @@ namespace SchoolProject2.Data.Repository
         Task<IEnumerable<TeacherUser>> GetAllTeachers();
         Task<bool> AddTeacher(TeacherUser teacher);
         Task<bool> DeleteTeacher(string id);
-        Task<bool> UpdateTeacher();
 
         ////Course////
         Task<IEnumerable<Course>> GetAllCourses();
         bool AddCourse(Course course);
         Task<bool> DeleteCourse(int id);
         Task<bool> UpdateCourseAsync(Course course);
+        Task<bool> UpdateCourseAsync(Course course, string id);
         Task<Course> GetCourseByIdOrNullAsync(int id);
+        Task<Course> GetCourseAndStudentByIdAsync(int id);
 
         //Schedule        
         Task<IEnumerable<Schedule>> GetAllSchedules();

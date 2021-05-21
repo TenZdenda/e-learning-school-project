@@ -5,25 +5,7 @@
 <div class="mb-10 flex items-center justify-between">
     <div>
         <h1 class="text-2xl font-bold">Manage your courses</h1>
-        <p class="text-gray-500">Create, edit or just delete them</p>
-    </div>
-    <div>
-        <a asp-page="CreateCourse"
-           class="focus:outline-none text-gray-500 hover:text-gray-900">
-            <div class="flex items-center gap-5">
-                <p class="font-semibold">Create new course</p>
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="h-5 w-5"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor">
-                    <path stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-            </div>
-        </a>
+        <p class="text-gray-500">All your Courses</p>
     </div>
 </div>
 <form method="post">
@@ -52,20 +34,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">  @item.CourseId</td>
                                         <td class="px-6 py-4 whitespace-nowrap">  @item.CourseName  </td>
                                         <td class="px-6 py-4 whitespace-nowrap">  @item.Duration </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">  @item.TeacherUserId </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a class="hover:text-black focus:outline-none" asp-page="EditCourse" asp-route-id="@item.CourseId">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     class="h-5 w-5"
-                                                     fill="none"
-                                                     viewBox="0 0 24 24"
-                                                     stroke="currentColor">
-                                                    <path stroke-linecap="round"
-                                                          stroke-linejoin="round"
-                                                          stroke-width="2"
-                                                          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                                </svg>
-                                            </a>
                                         </td>
                                     </tr>
                                 }
@@ -78,5 +47,5 @@
     </div>
 </form>
 <div>
-    <a asp-page="Index">Back to Admin Panel</a>
+    <a asp-page="Index">Back to Student Panel</a>
 </div>
