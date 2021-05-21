@@ -85,7 +85,7 @@ namespace SchoolProject2.Areas.Admin.Pages
                 return Page();
             }
 
-            var result = await _db.UpdateStudent(id, Input.Name, Input.CurrentRoleName);
+            var result = await _db.UpdateUserRole(id, Input.Name, Input.CurrentRoleName);
 
             if (result)
                 TempData["SM"] = $"Teacher {Input.Name} has been successfully edited";

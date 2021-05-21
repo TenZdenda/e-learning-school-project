@@ -14,15 +14,10 @@ namespace SchoolProject2.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ScheduleId { get; set; }
-
-        //public DateTime Date { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
 
         [BindProperty, DataType(DataType.Time)]
         public DateTime StartTime { get; set; }
-
-        //public LocalTime StartTime { get; set; }
-        //public LocalTime EndTime { get; set; }
 
         [BindProperty, DataType(DataType.Time)]
         public DateTime EndTime { get; set; }
@@ -32,7 +27,7 @@ namespace SchoolProject2.Models
 
         public virtual Course Course { get; set; }
 
-        // public Course course { get; set; }
+        
 
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SchoolProject2.Data.Repository;
 using SchoolProject2.Models;
 using SchoolProject2.Utility;
@@ -24,24 +25,44 @@ namespace SchoolProject2.Areas.Admin.Pages
         }
 
         [BindProperty(SupportsGet = true)]
+        public InputModel Input { get; set; } 
+
+        public class InputModel
+        {
+            public string Name { get; set; }
+            public SelectList AllUsers { get; set; }
+            public string CurrentUserId { get; set; }
+        }
+
+
+        [BindProperty(SupportsGet = true)]
         public Course Course { get; set; }
 
         [BindProperty]
         public List<StudentUser> Students { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task OnGetAsync(int id)
         {            
             Course = await _db.GetCourseByIdOrNullAsync(id);
-            
-            return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string userName = null)
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            var result = await _db.UpdateCourseAsync(Course);
+            if (!string.IsNullOrWhiteSpace(userName))
+            {
+                await SearchUser(Course.CourseId, userName);
+                return Page();
+            }
+
+            bool result;
+
+            if (string.IsNullOrWhiteSpace(Input.CurrentUserId))
+                result = await _db.UpdateCourseAsync(Course);
+            else
+                result = await _db.UpdateCourseAsync(Course, Input.CurrentUserId);
 
             if (result)
                 TempData["SM"] = $"Course {Course.CourseName} has been successfully edited";
@@ -52,13 +73,21 @@ namespace SchoolProject2.Areas.Admin.Pages
 
         }
 
-        public async Task OnPostSearchUser(string userName)
+        
+        public async Task SearchUser(int id, string userName)
         {
+            if (string.IsNullOrWhiteSpace(userName))
+                return;
+
+            Course = await _db.GetCourseByIdOrNullAsync(id);
             var rawStudentsArr = await _db.GetAllStudents();
             Students = rawStudentsArr.Where(x =>
                 x.Name.Contains(userName) ||
                 x.Email.Contains(userName)
             ).ToList();
+
+            Input.AllUsers = new SelectList(Students, "Id", "Email");
+           
         }
     }
 }

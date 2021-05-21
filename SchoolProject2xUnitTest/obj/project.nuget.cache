@@ -2,7 +2,7 @@
   "version": 2,
   "dgSpecHash": "5B8DsAen+VirOtDCsJOwVJFurRc/p9a53GGL4sciR1jX/6gCRl2jgQRwbhDUmAhiQLQOzPxkMWGmYx4qOd2JcA==",
   "success": true,
-  "projectFilePath": "D:\\2 nd Semester\\Mandatory Assignments\\e-learning-school-project\\SchoolProject2xUnitTest\\SchoolProject2xUnitTest.csproj",
+  "projectFilePath": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2xUnitTest\\SchoolProject2xUnitTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\razuh\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\razuh\\.nuget\\packages\\coverlet.collector\\1.3.0\\coverlet.collector.1.3.0.nupkg.sha512",
