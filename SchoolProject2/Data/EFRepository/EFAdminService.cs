@@ -24,7 +24,6 @@ namespace SchoolProject2.Data.EFRepository
             _roleManager = roleManager;
         }
 
-
         public async Task<bool> AddStudent(StudentUser student)
         {
             if (student != null)
@@ -214,12 +213,6 @@ namespace SchoolProject2.Data.EFRepository
         {
             if (course != null)
             {
-                //course = new Course
-                //{
-                //    CourseName = course.CourseName,
-                //    Duration = course.Duration                   
-                //};
-
                 context.Courses.Add(course);
                 context.SaveChanges();
                 return true;
