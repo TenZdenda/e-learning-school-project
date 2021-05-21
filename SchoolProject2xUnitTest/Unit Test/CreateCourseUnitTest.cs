@@ -1,22 +1,34 @@
-﻿using SchoolProject2.Data;
-using SchoolProject2.Data.EFRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using SchoolProject2.Models;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using SchoolProject2.Data;
+using SchoolProject2.Data.EFRepository;
 using SchoolProject2.Data.Repository;
-using SchoolProject2.Areas.Admin.Pages;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc;
+using SchoolProject2.Models;
+using Xunit.Sdk;
 
 namespace SchoolProject2xUnitTest.Unit_Test
 {
+    [TestClass]
     public class CreateCourseUnitTest
     {
+        [TestMethod]
+        public void CreateCourse_via_context()
+        {
+            var mockSet = new Mock<DbSet<Course>>();
+
+            var mockContext = new Mock<ApplicationDbContext>();
+            mockContext.Setup(m => m.Courses).Returns(mockSet.Object);
+
+            var service = new EFAdminService(mockContext.Object);
+            var course = new Course() { CourseName = "xxx", Duration = 300 };
+            service.AddCourse(course);
+
+            mockSet.Verify(m => m.Add(It.IsAny<Course>()), Times.Once());
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
+        }
         //[Fact]
         //public void OnPost_InValidState()
         //{
@@ -56,30 +68,30 @@ namespace SchoolProject2xUnitTest.Unit_Test
         //    return courses;
         //}
 
-        [Fact]
-        public void CreateCourse_Post_ReturnsABoolAndAddsCourse_WhenModelStateIsValid()
-        {
-            // Arrange
+        //[Fact]
+        //public void CreateCourse_Post_ReturnsABoolAndAddsCourse_WhenModelStateIsValid()
+        //{
+        //    // Arrange
 
-            var mockRepo = new Mock<IAdminService>();
+        //    var mockRepo = new Mock<EFAdminService>();
 
-            mockRepo.Setup(repo => repo.AddCourse(It.IsAny<Course>())).Verifiable();
+        //    //mockRepo.Setup(repo => repo.AddCourse(It.IsAny<Course>())).Verifiable();
 
-            var @course = new Course() { CourseName = "Danish102", Duration = 300 };
-            Console.WriteLine(mockRepo.Object);
+        //    var course = new Course() { CourseName = "Danish102", Duration = 300 };
+        //    Console.WriteLine(mockRepo.Object);
 
-            var createmodel = new CreateCourseModel(mockRepo.Object);
+        //    var createmodel = new CreateCourseModel(mockRepo.Object);
 
-            createmodel.Course = @course;
+        //    createmodel.Course = course;
 
-            // Act
-            var result = createmodel.OnPost();
+        //    // Act
+        //    var result = createmodel.OnPost();
 
-            // Assert
-            var redirectToActionResult = Assert.IsType<RedirectToPageResult>(result);
-            Assert.Equal("AllCourses", redirectToActionResult.PageName);
-            mockRepo.Verify((e) => e.AddCourse(@course), Times.Once);
+        //    // Assert
+        //    var redirectToActionResult = Assert.IsType<RedirectToPageResult>(result);
+        //    Assert.Equal("AllCourses", redirectToActionResult.PageName);
+        //    mockRepo.Verify((e) => e.AddCourse(course), Times.Once);
 
-        }
+        //}
     }
 }

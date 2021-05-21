@@ -23,6 +23,10 @@ namespace SchoolProject2.Data.EFRepository
             context = db;
             _roleManager = roleManager;
         }
+        public EFAdminService(ApplicationDbContext db)
+        {
+           context = db;           
+        }
 
         public async Task<bool> AddStudent(StudentUser student)
         {
