@@ -370,7 +370,7 @@ namespace SchoolProject2.Data.EFRepository
             {
                 if (course != null)
                 {
-                    Course courseToUpdate = await context.Courses.FindAsync(course.CourseId);
+                    Course courseToUpdate = await context.Courses.Include(x => x.StudentUsers).FirstOrDefaultAsync(x => x.CourseId == course.CourseId);
                     if (courseToUpdate is null)
                         return false;
 
@@ -378,10 +378,11 @@ namespace SchoolProject2.Data.EFRepository
                     if (studentFromDb is null)
                         return false;
 
-                    courseToUpdate.StudentUsers = new List<StudentUser>();
+                    //courseToUpdate.StudentUsers = new List<StudentUser>();
 
                     courseToUpdate.CourseName = course.CourseName;
                     courseToUpdate.Duration = course.Duration;
+                    if(!courseToUpdate.StudentUsers.Any(x=>x.Id==id))
                     courseToUpdate.StudentUsers.Add(studentFromDb);
 
                     await context.SaveChangesAsync();
@@ -393,6 +394,23 @@ namespace SchoolProject2.Data.EFRepository
             {
                 Console.WriteLine(e.Message);
             }
+            return false;
+        }
+
+        public async Task<bool> RemoveUserFromCourseAsync(string userId, int courseId)
+        {
+            var coursFromDb = await context.Courses.Include(x => x.StudentUsers).FirstOrDefaultAsync(x => x.CourseId == courseId);
+
+            if (coursFromDb is not null && (coursFromDb.StudentUsers.Any(x => x.Id == userId)))
+            {
+                var userForDelete = coursFromDb.StudentUsers.FirstOrDefault(x => x.Id == userId);
+                if (userForDelete is not null)
+                    coursFromDb.StudentUsers.Remove(userForDelete);
+
+                await context.SaveChangesAsync();
+                return true;
+            }
+
             return false;
         }
     }

@@ -9,19 +9,25 @@
         <tr>
             <th>  Student Id </th>
             <th>  Course Id </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
 
-        @*@if (Model.Enrollments != null)
+        @if (Model.Courses != null)
         {
-            @foreach (var item in Model.Enrollments)
+            foreach (var item in Model.Courses.StudentUsers)
             {
                 <tr>
-                    <td> @item.EnrollmentId </td>
-                    <td> @item.StudentId </td>
-                    <td> @item.CourseId</td>
+                    <td>@item.Id</td>
+                    <td>@Model.Courses.CourseId</td>
+                    <td><a asp-route-userId="@item.Id" asp-route-courseId="@Model.Courses.CourseId" asp-page-handler="Delete">Delete</a></td>
                 </tr>
             }
-        }*@
+        }
+        <tr>
+            <td>Course user count: </td>
+            <td>@Model.Courses.StudentUsers.Count</td>
+        </tr>
+    </tbody>
 </table>

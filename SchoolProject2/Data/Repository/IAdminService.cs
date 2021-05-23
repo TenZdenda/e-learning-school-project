@@ -32,6 +32,7 @@ namespace SchoolProject2.Data.Repository
         Task<bool> UpdateCourseAsync(Course course, string id);
         Task<Course> GetCourseByIdOrNullAsync(int id);
         Task<Course> GetCourseAndStudentByIdAsync(int id);
+        Task<bool> RemoveUserFromCourseAsync(string userId, int courseId);
 
         //Schedule        
         Task<IEnumerable<Schedule>> GetAllSchedules();
