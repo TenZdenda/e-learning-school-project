@@ -1,33 +1,42 @@
 ﻿@page
 @model SchoolProject2.Areas.Admin.Pages.EnrolmentsModel
 @{
+    ViewData["Title"] = "All Enrollments";
 }
 
-<h3 style="color:red">All Enrollments</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>  Student Id </th>
-            <th>  Course Id </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
 
-        @if (Model.Courses != null)
-        {
-            foreach (var item in Model.Courses.StudentUsers)
+<div class="mb-10 flex items-center justify-between">
+    <div>
+        <h1 class="text-2xl font-bold">Manage your enrolments</h1>
+        <p class="text-gray-500">Create, edit or just delete them</p>
+    </div>
+</div>
+
+@if (Model.Courses != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>  Student Id </th>
+                <th>  Course Id </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Courses.StudentUsers)
             {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@Model.Courses.CourseId</td>
-                    <td><a asp-route-userId="@item.Id" asp-route-courseId="@Model.Courses.CourseId" asp-page-handler="Delete">Delete</a></td>
-                </tr>
+            <tr>
+                <td>@item.Id</td>
+                <td>@Model.Courses.CourseId</td>
+                <td><a asp-route-userId="@item.Id" asp-route-courseId="@Model.Courses.CourseId" asp-page-handler="Delete">Delete</a></td>
+            </tr>
             }
-        }
-        <tr>
-            <td>Course user count: </td>
-            <td>@Model.Courses.StudentUsers.Count</td>
-        </tr>
-    </tbody>
-</table>
+
+            <tr>
+                <td>Course user count: </td>
+                <td>@Model.Courses.StudentUsers.Count</td>
+            </tr>
+            
+        </tbody>
+    </table>
+}
