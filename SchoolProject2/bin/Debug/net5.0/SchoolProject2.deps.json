@@ -33,22 +33,12 @@
     ".NETCoreApp,Version=v5.0": {
       "SchoolProject2/1.0.0": {
         "dependencies": {
-<<<<<<< HEAD
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "5.0.6",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.6",
           "Microsoft.AspNetCore.Identity.UI": "5.0.6",
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "5.0.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.6",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.6",
-=======
-          "EntityFramework": "6.4.4",
-          "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "5.0.4",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.4",
-          "Microsoft.AspNetCore.Identity.UI": "5.0.4",
-          "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "5.0.4",
-          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.4",
-          "Microsoft.EntityFrameworkCore.Tools": "5.0.4",
->>>>>>> backend
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "5.0.2",
           "NodaTime": "3.0.5",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
