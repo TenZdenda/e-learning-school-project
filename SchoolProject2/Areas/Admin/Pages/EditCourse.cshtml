@@ -13,7 +13,7 @@
     <form class="max-w-2xl" method="post" asp-page-handler="OnPostAsync">
         <div asp-validation-summary="All" class="text-danger"></div>
         <input type="hidden" asp-for="Course.CourseId" />
-        <input placeholder="User Name" name="userName" />
+        <input placeholder="User Name" name="userName" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
         <div class="flex justify-end items-center gap-6 mt-16">
             <button name="submit"
                     type="submit"

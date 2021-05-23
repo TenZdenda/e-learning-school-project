@@ -21,5 +21,17 @@ namespace SchoolProject2.Areas.Admin.Pages
         {
             Courses = await _db.GetCourseAndStudentByIdAsync(id);
         }
+
+        public async Task OnGetDeleteAsync(string userId, int courseId)
+        {
+            var result = await _db.RemoveUserFromCourseAsync(userId, courseId);
+
+            if (result)
+                TempData["SM"] = $"User has been successfully removed";
+            else
+                TempData["FM"] = $"User deleting failed";
+
+            Courses = await _db.GetCourseAndStudentByIdAsync(courseId);
+        }
     }
 }
