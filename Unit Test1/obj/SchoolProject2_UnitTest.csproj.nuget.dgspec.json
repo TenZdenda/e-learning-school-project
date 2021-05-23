@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\Unit Test1\\SchoolProject2_UnitTest.csproj": {}
+    "/Users/zdenekpasek/www/e-learning-school-project/Unit Test1/SchoolProject2_UnitTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2\\SchoolProject2.csproj": {
+    "/Users/zdenekpasek/www/e-learning-school-project/SchoolProject2/SchoolProject2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2\\SchoolProject2.csproj",
+        "projectUniqueName": "/Users/zdenekpasek/www/e-learning-school-project/SchoolProject2/SchoolProject2.csproj",
         "projectName": "SchoolProject2",
-        "projectPath": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2\\SchoolProject2.csproj",
-        "packagesPath": "C:\\Users\\vladi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2\\obj\\",
+        "projectPath": "/Users/zdenekpasek/www/e-learning-school-project/SchoolProject2/SchoolProject2.csproj",
+        "packagesPath": "/Users/zdenekpasek/.nuget/packages/",
+        "outputPath": "/Users/zdenekpasek/www/e-learning-school-project/SchoolProject2/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\vladi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/zdenekpasek/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,33 +38,31 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "EntityFramework": {
-              "target": "Package",
-              "version": "[6.4.4, )"
-            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.4, )"
+              "version": "[5.0.6, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.4, )"
+              "version": "[5.0.6, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[5.0.4, )"
+              "version": "[5.0.6, )"
             },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
-              "version": "[5.0.4, )"
+              "version": "[5.0.6, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[5.0.4, )"
+              "version": "[5.0.6, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.4, )"
+              "version": "[5.0.6, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
@@ -99,40 +91,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.203/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\Unit Test1\\SchoolProject2_UnitTest.csproj": {
+    "/Users/zdenekpasek/www/e-learning-school-project/Unit Test1/SchoolProject2_UnitTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\Unit Test1\\SchoolProject2_UnitTest.csproj",
+        "projectUniqueName": "/Users/zdenekpasek/www/e-learning-school-project/Unit Test1/SchoolProject2_UnitTest.csproj",
         "projectName": "SchoolProject2_UnitTest",
-        "projectPath": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\Unit Test1\\SchoolProject2_UnitTest.csproj",
-        "packagesPath": "C:\\Users\\vladi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\Unit Test1\\obj\\",
+        "projectPath": "/Users/zdenekpasek/www/e-learning-school-project/Unit Test1/SchoolProject2_UnitTest.csproj",
+        "packagesPath": "/Users/zdenekpasek/.nuget/packages/",
+        "outputPath": "/Users/zdenekpasek/www/e-learning-school-project/Unit Test1/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\vladi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/zdenekpasek/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2\\SchoolProject2.csproj": {
-                "projectPath": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2\\SchoolProject2.csproj"
+              "/Users/zdenekpasek/www/e-learning-school-project/SchoolProject2/SchoolProject2.csproj": {
+                "projectPath": "/Users/zdenekpasek/www/e-learning-school-project/SchoolProject2/SchoolProject2.csproj"
               }
             }
           }
@@ -189,7 +175,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.203/RuntimeIdentifierGraph.json"
         }
       }
     }

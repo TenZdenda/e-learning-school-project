@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace SchoolProject2.Pages
 {
-    public class PrivacyModel : PageModel
+    public class PackageModel : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
+        private readonly ILogger<PackageModel> _logger;
 
-        public PrivacyModel(ILogger<PrivacyModel> logger)
+        public PackageModel(ILogger<PackageModel> logger)
         {
             _logger = logger;
         }
