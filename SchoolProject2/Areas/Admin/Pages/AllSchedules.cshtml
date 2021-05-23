@@ -1,5 +1,8 @@
 ﻿@page
 @model SchoolProject2.Areas.Admin.Pages.AllSchedulesModel
+@{
+    ViewData["Title"] = "All schedules";
+}
 
 <div class="mb-10 flex items-center justify-between">
     <div>
@@ -28,14 +31,26 @@
 
 @if (TempData["SM"] is not null)
 {
-    <div>
-        <h2>@TempData["SM"]</h2>
+    <div class="bg-green-500 text-white px-5 py-3 rounded my-10 flex justify-between items-center">
+        <div>
+            <strong class="font-bold">Success!</strong>
+            <span>@TempData["SM"]</span>
+        </div>
+        <div>
+            <svg class="fill-current h-6 w-6 text-green-900" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" /></svg>
+        </div>
     </div>
 }
 @if (TempData["FM"] is not null)
 {
-    <div>
-        <h2>@TempData["FM"]</h2>
+    <div class="bg-red-500 text-white px-5 py-3 rounded my-10 flex justify-between items-center">
+        <div>
+            <strong class="font-bold">Error!</strong>
+            <span>@TempData["FM"]</span>
+        </div>
+        <div>
+            <svg class="fill-current h-6 w-6 text-red-900" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" /></svg>
+        </div>
     </div>
 }
 
@@ -70,11 +85,11 @@
                                         @if (item.Course != null)
                                         {
                                             <td class="px-6 py-4 whitespace-nowrap">  @item.Course.CourseName </td>
-}
+                                        }
                                         else
                                         {
                                             <td class="px-6 py-4 whitespace-nowrap">  No Course Assigned </td>
-}
+                                        }
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <a class="hover:text-black focus:outline-none" asp-page="EditSchedule" asp-route-id="@item.ScheduleId">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -111,8 +126,3 @@
         </div>
     </div>
 </form>
-<div>
-    <a asp-page="Index">Back to Admin Panel</a>
-</div>
-
-

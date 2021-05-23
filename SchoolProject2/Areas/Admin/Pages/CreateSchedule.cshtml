@@ -1,5 +1,8 @@
 ﻿@page
 @model SchoolProject2.Areas.Admin.Pages.CreateScheduleModel
+@{
+    ViewData["Title"] = "Create schedule";
+}
 
 <div>
     <div class="mb-10 flex items-center justify-between">
@@ -16,24 +19,26 @@
                     <option value="">Choose a day</option>
                 </select>
                 @*<input asp-for="@Model.Schedule.DayOfWeek" placeholder="Course name" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
-            <span asp-validation-for="@Model.Course.CourseName" class="text-danger"></span>*@
+                    <span asp-validation-for="@Model.Course.CourseName" class="text-danger"></span>*@
             </div>
-            <div>Start Time
+            <div>
+                Start Time
                 <input asp-for="@Model.Schedule.StartTime" placeholder="StartTime" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
                 <span asp-validation-for="@Model.Schedule.StartTime" class="text-danger"></span>
             </div>
-            <div>End Time
+            <div>
+                End Time
                 <input asp-for="@Model.Schedule.EndTime" placeholder="EndTime" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
                 <span asp-validation-for="@Model.Schedule.EndTime" class="text-danger"></span>
             </div>
             <div>
-                <select asp-for="@Model.Schedule.CourseId">                    
+                <select asp-for="@Model.Schedule.CourseId">
                     <option value="">Select One Course</option>
                     @foreach (var course in Model.Courses)
                     {
                         <option value="@course.CourseId">@course.CourseName</option>
                     }
-                </select>               
+                </select>
             </div>
         </div>
         <div>

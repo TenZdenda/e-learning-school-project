@@ -1,6 +1,7 @@
 .vs
-SchoolProject2/obj/*
-SchoolProject2/bin/Debug/*
-SchoolProject2/bin/*
+SchoolProject2/obj
+SchoolProject2/bin/Debug
+SchoolProject2/bin
+
 
 .DS_Store
