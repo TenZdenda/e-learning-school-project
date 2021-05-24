@@ -12,31 +12,58 @@
     </div>
 </div>
 
-@if (Model.Courses != null)
+@if (Model.Courses.StudentUsers.Count > 0)
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>  Student Id </th>
-                <th>  Course Id </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Courses.StudentUsers)
-            {
-            <tr>
-                <td>@item.Id</td>
-                <td>@Model.Courses.CourseId</td>
-                <td><a asp-route-userId="@item.Id" asp-route-courseId="@Model.Courses.CourseId" asp-page-handler="Delete">Delete</a></td>
-            </tr>
-            }
+    <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="overflow-hidden border-b border-gray-200 rounded">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Student Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course Name</th>
+                                <th scope="col" class="relative px-6 py-3">
+                                    <span class="sr-only">Action</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach (var item in Model.Courses.StudentUsers)
+                            {
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">@item.Name</td>
+                                <td class="px-6 py-4 whitespace-nowrap">@Model.Courses.CourseName</td>
+                                <td class="px-6 py-4 font-medium flex items-center gap-5 text-gray-500">
+                                    <a asp-route-userId="@item.Id" asp-route-courseId="@Model.Courses.CourseId" asp-page-handler="Delete" class="hover:text-black focus:outline-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             class="h-5 w-5"
+                                             fill="none"
+                                             viewBox="0 0 24 24"
+                                             stroke="currentColor">
+                                            <path stroke-linecap="round"
+                                                  stroke-linejoin="round"
+                                                  stroke-width="2"
+                                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="max-w-md mx-auto">
+        <img src="~/images/NoResults.svg" alt="No results" class="" />
+        <h2 class="text-center font-bold text-xl">There is no one 👀</h2>
+        <p class="text-center text-gray-500">Add someone to this course. By adjusting the course.</p>
 
-            <tr>
-                <td>Course user count: </td>
-                <td>@Model.Courses.StudentUsers.Count</td>
-            </tr>
-            
-        </tbody>
-    </table>
+        <a asp-area="Admin" asp-page="AllCourses" class="block text-center py-3 px-10 text-white bg-black rounded-md mt-10">Go back</a>
+    </div>
 }

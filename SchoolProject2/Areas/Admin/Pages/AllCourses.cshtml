@@ -76,9 +76,9 @@
                                 @foreach (var item in Model.Courses)
                                 {
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">  @item.CourseId</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">  @item.CourseName  </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">  @item.Duration </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">@item.CourseId</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">@item.CourseName</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">@item.Duration</td>
                                         <td class="px-6 py-4 font-medium flex items-center gap-5 text-gray-500">
                                             <a class="hover:text-black focus:outline-none" asp-page="EditCourse" asp-route-id="@item.CourseId">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
