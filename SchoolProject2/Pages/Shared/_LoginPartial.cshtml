@@ -2,25 +2,11 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="md:flex md:items-center md:space-x-6">
-@if (SignInManager.IsSignedIn(User))
+@if (!SignInManager.IsSignedIn(User))
 {
-    <li>
-        <a class="hover:text-blue-500" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name</a>
-    </li>
-    <li>
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
-            <button type="submit" class="hover:text-blue-500">Logout</button>
-        </form>
-    </li>
+    <a class="hidden lg:block">|</a>
+
+    <a asp-area="Identity" asp-page="/Account/Register" class="lg:inline-flex lg:w-auto w-full px-7 py-2 rounded text-black items-center justify-center hover:bg-gray-100">Register</a>
+
+    <a asp-area="Identity" asp-page="/Account/Login" class="lg:inline-flex lg:w-auto w-full px-7 py-2 rounded text-black items-center justify-center text-white bg-purple-400 hover:bg-purple-600">Login</a>
 }
-else
-{
-    <li>
-        <a class="hover:text-blue-500" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li>
-        <a asp-area="Identity" asp-page="/Account/Login" class="bg-blue-500 hover:bg-blue-800 text-white rounded font-medium px-8 py-3">Login</a>
-    </li>
-}
-</ul>
