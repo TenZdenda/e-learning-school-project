@@ -7,32 +7,35 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
-    <div class="px-10 md:px-0 w-full md:w-96">
+    <div class="px-10 md:px-0 max-w-3xl">
         <div class="mb-12">
-            <h1 class="text-3xl font-bold">Profile page</h1>
+            <h1 class="text-2xl font-bold">Profile page</h1>
         </div>
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-red-600"></div>
-            <div class="form-group">
-                <input asp-for="Input.Name" placeholder="Your name" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
-                <span asp-validation-for="Input.Name" class="text-red-600"></span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div class="form-group">
+                    <input asp-for="Input.Name" placeholder="Your name" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                    <span asp-validation-for="Input.Name" class="text-red-600"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.PhoneNumber" placeholder="Your phone number" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                    <span asp-validation-for="Input.PhoneNumber" class="text-red-600"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.Email" placeholder="Your email" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                    <span asp-validation-for="Input.Email" class="text-red-600"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.AreaCodeAndTown" placeholder="Your area code and town" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                    <span asp-validation-for="Input.AreaCodeAndTown" class="text-red-600"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.RoadNameAndNumber" placeholder="Your road name and number" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                    <span asp-validation-for="Input.RoadNameAndNumber" class="text-red-600"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <input asp-for="Input.PhoneNumber" placeholder="Your phone number" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-red-600"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="Input.Email" placeholder="Your email" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
-                <span asp-validation-for="Input.Email" class="text-red-600"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="Input.AreaCodeAndTown" placeholder="Your area code and town" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
-                <span asp-validation-for="Input.AreaCodeAndTown" class="text-red-600"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="Input.RoadNameAndNumber" placeholder="Your road name and number" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
-                <span asp-validation-for="Input.RoadNameAndNumber" class="text-red-600"></span>
-            </div>
+            
             <div class="form-group">
                 <button id="update-profile-button" type="submit" class="bg-purple-600 hover:bg-purple-800 text-white py-3 text-center w-full font-bold mx-auto block rounded mt-10">Save</button>
             </div>

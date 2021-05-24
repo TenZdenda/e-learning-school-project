@@ -298,11 +298,18 @@ namespace SchoolProject2.Data.EFRepository
 
         public bool AddSchedule(Schedule schedule)
         {
-            if (schedule != null)
-            {               
-                context.Schedules.Add(schedule);
-                context.SaveChanges();
-                return true;
+            try
+            {
+                if (schedule != null)
+                {
+                    context.Schedules.Add(schedule);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
             }
             return false;
         }
