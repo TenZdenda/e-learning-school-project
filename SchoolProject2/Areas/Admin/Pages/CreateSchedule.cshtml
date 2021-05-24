@@ -34,9 +34,12 @@
             <div>
                 <select asp-for="@Model.Schedule.CourseId">
                     <option value="">Select One Course</option>
-                    @foreach (var course in Model.Courses)
+                    @if (Model.Courses != null)
                     {
-                        <option value="@course.CourseId">@course.CourseName</option>
+                        @foreach (var course in Model.Courses)
+                        {
+                            <option value="@course.CourseId">@course.CourseName</option>
+                        }
                     }
                 </select>
             </div>
