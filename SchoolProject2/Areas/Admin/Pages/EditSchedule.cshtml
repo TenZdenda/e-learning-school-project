@@ -17,30 +17,40 @@
         <input type="hidden" asp-for="Schedule.ScheduleId" />
         <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 md:gap-y-5">
             <div>
-                <select asp-for="@Model.Schedule.DayOfWeek" asp-items="Html.GetEnumSelectList<DayOfWeek>()">
-                    <option value="">Choose a day</option>
+                Choose a day
+                <select asp-for="@Model.Schedule.DayOfWeek" asp-items="Html.GetEnumSelectList<DayOfWeek>()" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100">
+                    <option value="" disabled selected>Choose...</option>
                 </select>
+                <span asp-validation-for="@Model.Schedule.StartTime" class="text-red-400"></span>
             </div>
             <div>
-                <input asp-for="Schedule.StartTime" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100"></>
-                <span asp-validation-for="Schedule.StartTime" class="text-danger"></span>
+                Start Time
+                <input asp-for="@Model.Schedule.StartTime" placeholder="StartTime" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="@Model.Schedule.StartTime" class="text-red-400"></span>
             </div>
             <div>
-                <input asp-for="Schedule.EndTime" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100"></>
-                <span asp-validation-for="Schedule.EndTime" class="text-danger"></span>
+                End Time
+                <input asp-for="@Model.Schedule.EndTime" placeholder="EndTime" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="@Model.Schedule.EndTime" class="text-red-400"></span>
             </div>
             <div>
-                <select asp-for="@Model.Schedule.CourseId">
-                    <option value="">Select One Course</option>
-                    @foreach (var course in Model.Courses)
+                Select One Course
+                <select asp-for="@Model.Schedule.CourseId" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100">
+                    <option value="" disabled selected>Choose...</option>
+                    @if (Model.Courses != null)
                     {
-                        <option value="@course.CourseId">@course.CourseName</option>
+                        @foreach (var course in Model.Courses)
+                        {
+                            <option value="@course.CourseId">@course.CourseName</option>
+                        }
                     }
                 </select>
+                <span asp-validation-for="@Model.Schedule.StartTime" class="text-red-400"></span>
             </div>
         </div>
         <div>
             <div class="flex justify-end items-center gap-6 mt-16">
+                <a asp-page="AllSchedules" class="text-gray-500 hover:text-gray-900">Back to list</a>
                 <button name="submit"
                         type="submit"
                         class="px-10 py-4 bg-pink-500 hover:bg-pink-800 text-white font-semibold rounded">
@@ -49,8 +59,4 @@
             </div>
         </div>
     </form>
-</div>
-
-<div>
-    <a asp-page="AllSchedules" class="text-gray-500 hover:text-gray-900">Back to list</a>
 </div>
