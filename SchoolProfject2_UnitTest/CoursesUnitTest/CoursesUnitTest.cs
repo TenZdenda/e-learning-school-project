@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SchoolProfject2_UnitTest.CoursesUnitTest;
 using SchoolProject2.Data;
 using SchoolProject2.Data.EFRepository;
 using SchoolProject2.Models;
@@ -9,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace SchoolProfject2_UnitTest.CoursesUnitTest
+namespace SchoolProject2_UnitTest.CoursesUnitTest
 {
     public class CoursesUnitTest:EFTestDataService
     {
