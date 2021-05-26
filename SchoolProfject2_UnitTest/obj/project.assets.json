@@ -10550,23 +10550,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\razuh\\.nuget\\packages\\": {},
+    "C:\\Users\\vladi\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\2 nd Semester\\Mandatory Assignments\\e-learning-school-project\\SchoolProfject2_UnitTest\\SchoolProject2_UnitTest.csproj",
+      "projectUniqueName": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProfject2_UnitTest\\SchoolProject2_UnitTest.csproj",
       "projectName": "SchoolProject2_UnitTest",
-      "projectPath": "D:\\2 nd Semester\\Mandatory Assignments\\e-learning-school-project\\SchoolProfject2_UnitTest\\SchoolProject2_UnitTest.csproj",
-      "packagesPath": "C:\\Users\\razuh\\.nuget\\packages\\",
-      "outputPath": "D:\\2 nd Semester\\Mandatory Assignments\\e-learning-school-project\\SchoolProfject2_UnitTest\\obj\\",
+      "projectPath": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProfject2_UnitTest\\SchoolProject2_UnitTest.csproj",
+      "packagesPath": "C:\\Users\\vladi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProfject2_UnitTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\razuh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vladi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -10581,8 +10581,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\2 nd Semester\\Mandatory Assignments\\e-learning-school-project\\SchoolProject2\\SchoolProject2.csproj": {
-              "projectPath": "D:\\2 nd Semester\\Mandatory Assignments\\e-learning-school-project\\SchoolProject2\\SchoolProject2.csproj"
+            "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2\\SchoolProject2.csproj": {
+              "projectPath": "C:\\Users\\vladi\\Documents\\GitHub\\e-learning-school-project\\SchoolProject2\\SchoolProject2.csproj"
             }
           }
         }
