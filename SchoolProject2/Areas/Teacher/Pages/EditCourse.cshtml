@@ -1,5 +1,5 @@
-﻿@page "/Admin/EditCourse/{id}/{handler?}"
-@model SchoolProject2.Areas.Admin.Pages.EditCourseModel
+﻿@page
+@model SchoolProject2.Areas.Teacher.Pages.EditCourseModel
 @{
     ViewData["Title"] = "Edit course";
 }
@@ -36,7 +36,7 @@
         </div>
         <div>
             <div class="flex justify-end items-center gap-6 mt-16">
-                <a asp-page="AllCourses" class="text-gray-500 hover:text-gray-900">Back to list</a>
+                <a asp-area="Teacher" asp-page="AllCourses" class="text-gray-500 hover:text-gray-900">Back to list</a>
                 <button name="submit"
                         type="submit"
                         class="px-10 py-4 bg-pink-500 hover:bg-pink-800 text-white font-semibold rounded">

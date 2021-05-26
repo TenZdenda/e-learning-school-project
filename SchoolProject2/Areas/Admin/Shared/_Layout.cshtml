@@ -15,13 +15,13 @@
 <body>
     <div class="h-screen flex">
         <!-- Fixed sidebar -->
-        <div class="w-64 bg-gray-900 rounded-r-lg text-gray-100 px-5 py-8 space-y-16 absolute inset-y-0 left-0 transform md:relative md:translate-x-0 transition duration-200 ease-in-out z-10">
+        <div class="sidebar w-64 bg-gray-900 rounded-r-lg text-gray-100 px-5 py-8 space-y-16 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out z-10 overflow-y-scroll">
             <div class="flex justify-between px-4">
                 <div class="flex items-center space-x-5">
-                    <div class="bg-gray-700 px-3 py-2 rounded-2xl">🚀</div>
-                    <span class="text-xl font-bold">LOGO</span>
+                    <div class="bg-gray-700 px-3 py-2 rounded-2xl">🎓</div>
+                    <span class="text-xl font-bold">School</span>
                 </div>
-                <button class="focus:outline-none md:hidden">
+                <button class="focus:outline-none md:hidden close-button">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="h-6 w-6"
                          fill="none"
@@ -136,7 +136,7 @@
             <!-- Scrollable container -->
             <div class="flex-1 overflow-y-scroll">
                 <div class="flex items-center justify-between md:justify-end px-6 py-4">
-                    <button class="focus:outline-none md:hidden">
+                    <button class="focus:outline-none md:hidden mobile-menu-button">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              class="h-6 w-6"
                              fill="none"
@@ -154,7 +154,7 @@
                              alt="Profile picture" />
                         <div class="ml-4 hidden md:block">
                             <p class="font-bold">@User.Identity.Name</p>
-                            <p class="text-gray-500">Email address</p>
+                            <p class="text-gray-500">Email</p>
                         </div>
                     </a>
                 </div>
@@ -165,6 +165,21 @@
         </div>
     </div>
 
+    <script>
+
+        const btn = document.querySelector(".mobile-menu-button");
+        const sidebar = document.querySelector(".sidebar");
+        const close = document.querySelector(".close-button");
+
+        // add our event listener for the click
+        btn.addEventListener("click", () => {
+            sidebar.classList.toggle("-translate-x-full");
+        });
+
+        close.addEventListener("click", () => {
+            sidebar.classList.toggle("-translate-x-full");
+        });
+    </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)

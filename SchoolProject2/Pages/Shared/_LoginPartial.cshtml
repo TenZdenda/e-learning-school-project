@@ -2,10 +2,18 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-@if (!SignInManager.IsSignedIn(User))
-{
-    <a class="hidden lg:block">|</a>
+<a class="hidden lg:block">|</a>
 
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
+        <button type="submit" class="lg:inline-flex lg:w-auto w-full px-7 py-2 rounded text-black items-center justify-center hover:bg-gray-100">
+            Log out
+        </button>
+    </form>
+}
+else
+{
     <a asp-area="Identity" asp-page="/Account/Register" class="lg:inline-flex lg:w-auto w-full px-7 py-2 rounded text-black items-center justify-center hover:bg-gray-100">Register</a>
 
     <a asp-area="Identity" asp-page="/Account/Login" class="lg:inline-flex lg:w-auto w-full px-7 py-2 rounded text-black items-center justify-center text-white bg-purple-400 hover:bg-purple-600">Login</a>
