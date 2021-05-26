@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolProfject2_UnitTest.CoursesUnitTest
+namespace SchoolProfject2_UnitTest.xUnitTestsOfCourses
 {
-    public class EFTestDataService
+    public class EFTestDataServiceOfCourses
     {
         protected DbContextOptions<ApplicationDbContext> ContextOptions { get; }
 
-        protected EFTestDataService(DbContextOptions<ApplicationDbContext> contextOptions)
+        protected EFTestDataServiceOfCourses(DbContextOptions<ApplicationDbContext> contextOptions)
         {
             ContextOptions = contextOptions;
             Seed();
@@ -25,11 +25,11 @@ namespace SchoolProfject2_UnitTest.CoursesUnitTest
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
+                context.StudentUsers.Add(new StudentUser() { Id = "S1", Name = "Stud1", Email = "S1@gmail.com", Password = "Abc+123", ConfirmPassword = "Abc+123" });
+                context.StudentUsers.Add(new StudentUser() { Id = "S2", Name = "Stud2", Email = "S2@yahoo.com", Password = "Abc+123", ConfirmPassword = "Abc+123" });
                 context.Courses.Add(new Course() { CourseId = 1, CourseName = "sssss", Duration = 600, TeacherUserId = "xxxx2222"});
                 context.Courses.Add(new Course() { CourseId = 2, CourseName = "xxxx", Duration = 600, TeacherUserId = "xxxx2222" });
-                //context.Movies.Add(new Movie() { Id = 2, Title = "Rocky", Year = 1982, RunningTimeInMins = 223, StudioId = 1 });
-
-
+               
                 context.SaveChanges();
             }
         }
