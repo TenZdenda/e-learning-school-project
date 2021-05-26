@@ -523,4 +523,3 @@ D:\2 nd Semester\Mandatory Assignments\e-learning-school-project\SchoolProfject2
 D:\2 nd Semester\Mandatory Assignments\e-learning-school-project\SchoolProfject2_UnitTest\obj\Debug\net5.0\SchoolProject2_UnitTest.pdb
 D:\2 nd Semester\Mandatory Assignments\e-learning-school-project\SchoolProfject2_UnitTest\obj\Debug\net5.0\SchoolProject2_UnitTest.genruntimeconfig.cache
 D:\2 nd Semester\Mandatory Assignments\e-learning-school-project\SchoolProfject2_UnitTest\bin\Debug\net5.0\CoverletSourceRootsMapping
-D:\2 nd Semester\Mandatory Assignments\e-learning-school-project\SchoolProfject2_UnitTest\bin\Debug\net5.0\SchoolProject2.StaticWebAssets.xml
