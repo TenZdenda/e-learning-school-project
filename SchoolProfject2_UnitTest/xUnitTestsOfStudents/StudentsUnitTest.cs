@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace SchoolProject2_UnitTest.xUnitTests
+namespace SchoolProject2_UnitTest.xUnitTestsOfStudents
 {
     public class StudentsUnitTest : EFTestDataServiceOfStudents
     {       
@@ -20,7 +20,7 @@ namespace SchoolProject2_UnitTest.xUnitTests
             
         }
 
-        [Fact]
+       // [Fact]
         public async void Add_Student_Test()
         {
             using (var context = new ApplicationDbContext(ContextOptions))

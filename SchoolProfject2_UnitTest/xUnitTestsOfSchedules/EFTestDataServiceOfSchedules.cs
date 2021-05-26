@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolProfject2_UnitTest.SchedulesUnitTest
+namespace SchoolProfject2_UnitTest.xUnitTestsOfSchedules
 {
-    public class EFTestDataService
+    public class EFTestDataServiceOfSchedules
     {
         protected DbContextOptions<ApplicationDbContext> ContextOptions { get; }
 
-        protected EFTestDataService(DbContextOptions<ApplicationDbContext> contextOptions)
+        protected EFTestDataServiceOfSchedules(DbContextOptions<ApplicationDbContext> contextOptions)
         {
             ContextOptions = contextOptions;
             Seed();
@@ -25,7 +25,8 @@ namespace SchoolProfject2_UnitTest.SchedulesUnitTest
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
-                context.Schedules.Add(new Schedule() { ScheduleId = 1, DayOfWeek = DayOfWeek.Wednesday, StartTime = new DateTime(2021, 05, 26, 8, 0, 0), EndTime = new DateTime(2021, 05, 26, 10, 0, 0) });
+                context.Schedules.Add(new Schedule() { ScheduleId = 1, DayOfWeek = DayOfWeek.Wednesday, StartTime = new DateTime(2021, 05, 26, 10, 0, 0), EndTime = new DateTime(2021, 05, 26, 12, 0, 0) });
+                context.Schedules.Add(new Schedule() { ScheduleId = 2, DayOfWeek = DayOfWeek.Tuesday, StartTime = new DateTime(2021, 05, 26, 11, 0, 0), EndTime = new DateTime(2021, 05, 26, 13, 0, 0) });
 
                 context.SaveChanges();
             }

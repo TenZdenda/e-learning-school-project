@@ -396,18 +396,27 @@ namespace SchoolProject2.Data.EFRepository
 
         public async Task<bool> DeleteSchedule(int id)
         {
-            if (id == 0)
-                return false;
+            try
+            {
+                if (id == 0)
+                    return false;
 
-            var ScheduleFromDb = await context.Schedules.Include(x => x.Course).FirstOrDefaultAsync(x => x.ScheduleId == id);
+                var ScheduleFromDb = await context.Schedules.Include(x => x.Course).FirstOrDefaultAsync(x => x.ScheduleId == id);
 
-            if (ScheduleFromDb == null)
-                return false;
+                if (ScheduleFromDb == null)
+                    return false;
 
-            context.Remove(ScheduleFromDb);
+                context.Remove(ScheduleFromDb);
 
-            await context.SaveChangesAsync();
-            return true;
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return false;
+
         }
 
         public async Task<bool> UpdateScheduleAsync(Schedule schedule)
