@@ -14,9 +14,9 @@ namespace SchoolProject2.Areas.Teacher.Pages
     [Authorize(Roles = SD.TeacherUser)]
     public class EditScheduleModel : PageModel
     {
-        private readonly IAdminService _db;
+        private readonly ITeacherService _db;
 
-        public EditScheduleModel(IAdminService db)
+        public EditScheduleModel(ITeacherService db)
         {
             _db = db;
 

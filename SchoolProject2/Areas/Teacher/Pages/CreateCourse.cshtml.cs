@@ -14,12 +14,12 @@ namespace SchoolProject2.Areas.Teacher.Pages
     [Authorize(Roles = SD.TeacherUser)]
     public class CreateCourseModel : PageModel
     {
-        private readonly IAdminService _db;
+        private readonly ITeacherService _db;
 
         [BindProperty]
         public Course Course { get; set; }
 
-        public CreateCourseModel(IAdminService db)
+        public CreateCourseModel(ITeacherService db)
         {
             _db = db;
         }

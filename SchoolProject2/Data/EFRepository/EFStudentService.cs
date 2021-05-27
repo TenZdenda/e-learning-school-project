@@ -19,14 +19,32 @@ namespace SchoolProject2.Data.EFRepository
         }
         public async Task<IEnumerable<Schedule>> GetAllSchedules()
         {
-            var result = await context.Schedules.Include(s => s.Course).ToListAsync();
-            return result;
+            try
+            {
+                var result = await context.Schedules.Include(s => s.Course).ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
         }
 
         public async Task<IEnumerable<Course>> GetAllCourses()
         {
-            var result = await context.Courses.ToListAsync();
-            return result;
+            try
+            {
+                var result = await context.Courses.ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
         }
     }
 }

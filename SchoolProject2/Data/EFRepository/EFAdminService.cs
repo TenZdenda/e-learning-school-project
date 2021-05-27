@@ -30,99 +30,134 @@ namespace SchoolProject2.Data.EFRepository
 
         public async Task<bool> AddStudent(StudentUser student)
         {
-            if (student != null)
+            try
             {
-                var user = new StudentUser
+                if (student != null)
                 {
-                    UserName = student.Email,
-                    Email = student.Email,
-                    Name = student.Name,
-                    PhoneNumber = student.PhoneNumber
-                };
-                var result = await _userManager.CreateAsync(user, student.Password);
+                    var user = new StudentUser
+                    {
+                        UserName = student.Email,
+                        Email = student.Email,
+                        Name = student.Name,
+                        PhoneNumber = student.PhoneNumber
+                    };
+                    var result = await _userManager.CreateAsync(user, student.Password);
 
-                if (result.Succeeded)
-                {
-                    if (!await _roleManager.RoleExistsAsync(SD.StudentUser))
-                        await _roleManager.CreateAsync(new IdentityRole(SD.StudentUser));
+                    if (result.Succeeded)
+                    {
+                        if (!await _roleManager.RoleExistsAsync(SD.StudentUser))
+                            await _roleManager.CreateAsync(new IdentityRole(SD.StudentUser));
 
-                    await _userManager.AddToRoleAsync(user, SD.StudentUser);
-                    return true;
+                        await _userManager.AddToRoleAsync(user, SD.StudentUser);
+                        return true;
+                    }
+                    return false;
                 }
                 return false;
             }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
+            }
+
             return false;
         }
 
         public async Task<IEnumerable<StudentUser>> GetAllStudents()
         {
-            var result = await context.StudentUsers.ToListAsync();
-            return result;
+            try
+            {
+                var result = await context.StudentUsers.ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
 
+            return null;
         }
 
 
         public async Task<bool> DeleteStudent(string id)
         {
-            if (id == null || id.Trim().Length == 0)
-                return false;
+            try
+            {
+                if (id == null || id.Trim().Length == 0)
+                    return false;
 
-            var userFromDb = await context.StudentUsers.FindAsync(id);
+                var userFromDb = await context.StudentUsers.FindAsync(id);
 
-            if (userFromDb == null)
-                return false;
+                if (userFromDb == null)
+                    return false;
 
-            context.Remove(userFromDb);
+                context.Remove(userFromDb);
 
-            await context.SaveChangesAsync();
-            return true;
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return false;
         }
 
 
         public async Task<bool> UpdateUserRole(string id, string newName, string newRole)
         {
-            var userFromDb = await context.Users.FindAsync(id);
-
-            if (userFromDb is null)
-                return false;
-
-            var type = userFromDb.GetType().Name;
-
-            switch (type)
+            try
             {
-                case nameof(StudentUser):
-                    var castedStudent = userFromDb as StudentUser;
-                    castedStudent.Name = newName;
-                    var currentRoleName = await GetUserRoleOrNullAsync(castedStudent.Id);
-                    if (newRole != currentRoleName)
-                    {
-                        await _userManager.RemoveFromRoleAsync(castedStudent, currentRoleName);
-                        await _userManager.AddToRoleAsync(castedStudent, newRole);
-                    }
-                    await context.SaveChangesAsync();
-                    return true;
-                case nameof(AdminUser):
-                    var castedAdmin = userFromDb as AdminUser;
-                    castedAdmin.Name = newName;
-                    var currentRoleAdmin = await GetUserRoleOrNullAsync(castedAdmin.Id);
-                    if (newRole != currentRoleAdmin)
-                    {
-                        await _userManager.RemoveFromRoleAsync(castedAdmin, currentRoleAdmin);
-                        await _userManager.AddToRoleAsync(castedAdmin, currentRoleAdmin);
-                    }
-                    await context.SaveChangesAsync();
-                    return true;
-                case nameof(TeacherUser):
-                    var castedTeacher = userFromDb as TeacherUser;
-                    castedTeacher.Name = newName;
-                    var currentRoleTeacher = await GetUserRoleOrNullAsync(castedTeacher.Id);
-                    if (newRole != currentRoleTeacher)
-                    {
-                        await _userManager.RemoveFromRoleAsync(castedTeacher, currentRoleTeacher);
-                        await _userManager.AddToRoleAsync(castedTeacher, currentRoleTeacher);
-                    }
-                    await context.SaveChangesAsync();
-                    return true;
+                var userFromDb = await context.Users.FindAsync(id);
+
+                if (userFromDb is null)
+                    return false;
+
+                var type = userFromDb.GetType().Name;
+
+                switch (type)
+                {
+                    case nameof(StudentUser):
+                        var castedStudent = userFromDb as StudentUser;
+                        castedStudent.Name = newName;
+                        var currentRoleName = await GetUserRoleOrNullAsync(castedStudent.Id);
+                        if (newRole != currentRoleName)
+                        {
+                            await _userManager.RemoveFromRoleAsync(castedStudent, currentRoleName);
+                            await _userManager.AddToRoleAsync(castedStudent, newRole);
+                        }
+                        await context.SaveChangesAsync();
+                        return true;
+                    case nameof(AdminUser):
+                        var castedAdmin = userFromDb as AdminUser;
+                        castedAdmin.Name = newName;
+                        var currentRoleAdmin = await GetUserRoleOrNullAsync(castedAdmin.Id);
+                        if (newRole != currentRoleAdmin)
+                        {
+                            await _userManager.RemoveFromRoleAsync(castedAdmin, currentRoleAdmin);
+                            await _userManager.AddToRoleAsync(castedAdmin, currentRoleAdmin);
+                        }
+                        await context.SaveChangesAsync();
+                        return true;
+                    case nameof(TeacherUser):
+                        var castedTeacher = userFromDb as TeacherUser;
+                        castedTeacher.Name = newName;
+                        var currentRoleTeacher = await GetUserRoleOrNullAsync(castedTeacher.Id);
+                        if (newRole != currentRoleTeacher)
+                        {
+                            await _userManager.RemoveFromRoleAsync(castedTeacher, currentRoleTeacher);
+                            await _userManager.AddToRoleAsync(castedTeacher, currentRoleTeacher);
+                        }
+                        await context.SaveChangesAsync();
+                        return true;
+                }
+
+                return false;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
             }
 
             return false;
@@ -130,21 +165,39 @@ namespace SchoolProject2.Data.EFRepository
 
         public async Task<IdentityRole> GetUserRoleOrNullAsync(IdentityUser user)
         {
-            foreach (var role in _roleManager.Roles)
+            try
             {
-                if (await _userManager.IsInRoleAsync(user, role.Name))
+                foreach (var role in _roleManager.Roles)
                 {
-                    var returnedRole = new IdentityRole(role.Name);
-                    return returnedRole;
+                    if (await _userManager.IsInRoleAsync(user, role.Name))
+                    {
+                        var returnedRole = new IdentityRole(role.Name);
+                        return returnedRole;
+                    }
                 }
+                return null;
             }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
+            }
+
             return null;
         }
 
         public async Task<StudentUser> GetStudent(string id)
         {
-            var result = await context.StudentUsers.FindAsync(id);
-            return result;
+            try
+            {
+                var result = await context.StudentUsers.FindAsync(id);
+                return result;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
         }
 
 
@@ -155,50 +208,78 @@ namespace SchoolProject2.Data.EFRepository
 
         public async Task<IEnumerable<TeacherUser>> GetAllTeachers()
         {
-            var result = await context.TeacherUsers.ToListAsync();
-            return result;
+            try
+            {
+                var result = await context.TeacherUsers.ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
         }
 
         public async Task<bool> AddTeacher(TeacherUser teacher)
         {
-            if (teacher != null)
+            try
             {
-                var user = new TeacherUser
+                if (teacher != null)
                 {
-                    UserName = teacher.Email,
-                    Email = teacher.Email,
-                    Name = teacher.Name,
-                    PhoneNumber = teacher.PhoneNumber
-                };
-                var result = await _userManager.CreateAsync(user, teacher.Password);
+                    var user = new TeacherUser
+                    {
+                        UserName = teacher.Email,
+                        Email = teacher.Email,
+                        Name = teacher.Name,
+                        PhoneNumber = teacher.PhoneNumber
+                    };
+                    var result = await _userManager.CreateAsync(user, teacher.Password);
 
-                if (result.Succeeded)
-                {
-                    if (!await _roleManager.RoleExistsAsync(SD.TeacherUser))
-                        await _roleManager.CreateAsync(new IdentityRole(SD.TeacherUser));
+                    if (result.Succeeded)
+                    {
+                        if (!await _roleManager.RoleExistsAsync(SD.TeacherUser))
+                            await _roleManager.CreateAsync(new IdentityRole(SD.TeacherUser));
 
-                    await _userManager.AddToRoleAsync(user, SD.TeacherUser);
-                    return true;
+                        await _userManager.AddToRoleAsync(user, SD.TeacherUser);
+                        return true;
+                    }
+                    return false;
                 }
                 return false;
             }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
+            }
+
             return false;
         }
 
         public async Task<bool> DeleteTeacher(string id)
         {
-            if (id == null || id.Trim().Length == 0)
-                return false;
+            try
+            {
+                if (id == null || id.Trim().Length == 0)
+                    return false;
 
-            var userFromDb = await context.TeacherUsers.FindAsync(id);
+                var userFromDb = await context.TeacherUsers.FindAsync(id);
 
-            if (userFromDb == null)
-                return false;
+                if (userFromDb == null)
+                    return false;
 
-            context.Remove(userFromDb);
+                context.Remove(userFromDb);
 
-            await context.SaveChangesAsync();
-            return true;
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return false;
+            
         }
         // COURSES
         public async Task<IEnumerable<Course>> GetAllCourses()
@@ -212,6 +293,7 @@ namespace SchoolProject2.Data.EFRepository
             {
                 Console.WriteLine(e.Message);
             }
+
             return null;
 
         }
@@ -232,6 +314,7 @@ namespace SchoolProject2.Data.EFRepository
             {
                 Console.WriteLine(e.Message);
             }
+
             return false;
         }
 
@@ -295,6 +378,7 @@ namespace SchoolProject2.Data.EFRepository
             {
                 Console.WriteLine(e.Message);
             }
+
             return false;
 
         }
@@ -340,34 +424,70 @@ namespace SchoolProject2.Data.EFRepository
 
         public async Task<List<IdentityRole>> GetAllRolesAsync()
         {
-            return await _roleManager.Roles.ToListAsync();
+            try
+            {
+                return await _roleManager.Roles.ToListAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
         }
 
         //UserRoles
         public async Task<string> GetUserRoleOrNullAsync(string userId)
         {
-            var user = await _userManager.FindByIdAsync(userId);
-
-            foreach (var role in _roleManager.Roles)
+            try
             {
-                if (await _userManager.IsInRoleAsync(user, role.Name))
-                    return role.Name;
+                var user = await _userManager.FindByIdAsync(userId);
+
+                foreach (var role in _roleManager.Roles)
+                {
+                    if (await _userManager.IsInRoleAsync(user, role.Name))
+                        return role.Name;
+                }
+                return null;
             }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
+            }
+
             return null;
         }
 
         public async Task<Course> GetCourseByIdOrNullAsync(int id)
         {
-            var result = await context.Courses.FindAsync(id);
-            return (result is null) ? null : result;
+            try
+            {
+                var result = await context.Courses.FindAsync(id);
+                return (result is null) ? null : result;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
         }
 
 
         //Schedules
         public async Task<IEnumerable<Schedule>> GetAllSchedules()
         {
-            var result = await context.Schedules.Include(s => s.Course).ToListAsync();
-            return result;
+            try
+            {
+                var result = await context.Schedules.Include(s => s.Course).ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
         }
 
         public bool AddSchedule(Schedule schedule)
@@ -385,13 +505,23 @@ namespace SchoolProject2.Data.EFRepository
             {
                 Console.WriteLine(e.Message);
             }
+
             return false;
         }
             
         public async Task<Schedule> GetScheduleByIdOrNullAsync(int id)
         {
-            var result = await context.Schedules.FindAsync(id);
-            return (result is null) ? null : result;
+            try
+            {
+                var result = await context.Schedules.FindAsync(id);
+                return (result is null) ? null : result;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
         }
 
         public async Task<bool> DeleteSchedule(int id)
@@ -413,10 +543,10 @@ namespace SchoolProject2.Data.EFRepository
             }
             catch (ArgumentException e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
             }
-            return false;
 
+            return false;
         }
 
         public async Task<bool> UpdateScheduleAsync(Schedule schedule)
@@ -444,14 +574,24 @@ namespace SchoolProject2.Data.EFRepository
             {
                 Console.WriteLine(e.Message);
             }
+
             return false;
 
         }
 
         public async Task<Course> GetCourseAndStudentByIdAsync(int id)
         {
-            var result = await context.Courses.Include(x => x.StudentUsers).FirstOrDefaultAsync(x => x.CourseId == id);
-            return result;
+            try
+            {
+                var result = await context.Courses.Include(x => x.StudentUsers).FirstOrDefaultAsync(x => x.CourseId == id);
+                return (result is null) ? null : result;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
         }
 
         public async Task<bool> UpdateCourseAsync(Course course, string id)
@@ -484,21 +624,31 @@ namespace SchoolProject2.Data.EFRepository
             {
                 Console.WriteLine(e.Message);
             }
+
             return false;
         }
 
         public async Task<bool> RemoveUserFromCourseAsync(string userId, int courseId)
         {
-            var coursFromDb = await context.Courses.Include(x => x.StudentUsers).FirstOrDefaultAsync(x => x.CourseId == courseId);
-
-            if (coursFromDb is not null && (coursFromDb.StudentUsers.Any(x => x.Id == userId)))
+            try
             {
-                var userForDelete = coursFromDb.StudentUsers.FirstOrDefault(x => x.Id == userId);
-                if (userForDelete is not null)
-                    coursFromDb.StudentUsers.Remove(userForDelete);
+                var coursFromDb = await context.Courses.Include(x => x.StudentUsers).FirstOrDefaultAsync(x => x.CourseId == courseId);
 
-                await context.SaveChangesAsync();
-                return true;
+                if (coursFromDb is not null && (coursFromDb.StudentUsers.Any(x => x.Id == userId)))
+                {
+                    var userForDelete = coursFromDb.StudentUsers.FirstOrDefault(x => x.Id == userId);
+                    if (userForDelete is not null)
+                        coursFromDb.StudentUsers.Remove(userForDelete);
+
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
             }
 
             return false;

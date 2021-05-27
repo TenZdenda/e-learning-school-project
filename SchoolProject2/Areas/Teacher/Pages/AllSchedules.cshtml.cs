@@ -14,14 +14,14 @@ namespace SchoolProject2.Areas.Teacher.Pages
     [Authorize(Roles = SD.TeacherUser)]
     public class AllSchedulesModel : PageModel
     {
-        private readonly IAdminService _db;
+        private readonly ITeacherService _db;
 
         public IEnumerable<Schedule> Schedules { get; set; }
 
         [BindProperty]
         public Schedule Schedule { get; set; }
 
-        public AllSchedulesModel(IAdminService db)
+        public AllSchedulesModel(ITeacherService db)
         {
             _db = db;
         }

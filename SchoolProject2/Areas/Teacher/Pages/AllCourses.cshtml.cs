@@ -14,11 +14,11 @@ namespace SchoolProject2.Areas.Teacher.Pages
     [Authorize(Roles = SD.TeacherUser)]
     public class AllCoursesModel : PageModel
     {
-        private readonly IAdminService _db;
+        private readonly ITeacherService _db;
 
         public IEnumerable<Course> Courses { get; set; }
 
-        public AllCoursesModel(IAdminService db)
+        public AllCoursesModel(ITeacherService db)
         {
             _db = db;
         }
