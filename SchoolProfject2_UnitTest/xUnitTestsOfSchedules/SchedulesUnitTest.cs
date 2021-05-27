@@ -59,7 +59,7 @@ namespace SchoolProject2_UnitTest.xUnitTestsOfSchedules
 
                 await service.DeleteSchedule(1);
 
-                Assert.True(context.Schedules.ToList().Count == 1);
+                Assert.Equal(1, context.Schedules.ToList().Count);
                 Assert.True(context.Schedules.ToList()[0].ScheduleId == 2 && context.Schedules.ToList()[0].DayOfWeek == DayOfWeek.Tuesday);
             }
         }
