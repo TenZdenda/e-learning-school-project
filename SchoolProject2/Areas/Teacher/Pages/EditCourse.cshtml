@@ -1,0 +1,48 @@
+﻿@page
+@model SchoolProject2.Areas.Teacher.Pages.EditCourseModel
+@{
+    ViewData["Title"] = "Edit course";
+}
+
+<div>
+    <div class="mb-10 flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold">Edit course</h1>
+            <p class="text-gray-500">Fill the form</p>
+        </div>
+    </div>
+
+    <form class="max-w-2xl" method="post" asp-page-handler="OnPostAsync">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="hidden" asp-for="Course.CourseId" />
+        <input placeholder="User Name" name="userName" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+        <div class="flex justify-end items-center gap-6 mt-16">
+            <button name="submit"
+                    type="submit"
+                    class="px-10 py-4 bg-pink-500 hover:bg-pink-800 text-white font-semibold rounded">
+                Search Student
+            </button>
+        </div>
+        <select asp-for="@Model.Input.CurrentUserId" asp-items="@Model.Input.AllUsers" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100"></select>
+        <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 md:gap-y-5">
+            <div>
+                <input asp-for="Course.CourseName" placeholder="Courses's name" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100" />
+                <span asp-validation-for="Course.CourseName" class="text-danger"></span>
+            </div>
+            <div>
+                <input asp-for="Course.Duration" class="w-full h-15 px-5 py-4 my-2 outline-none rounded bg-gray-100"></>
+                <span asp-validation-for="Course.Duration" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <div class="flex justify-end items-center gap-6 mt-16">
+                <a asp-area="Teacher" asp-page="AllCourses" class="text-gray-500 hover:text-gray-900">Back to list</a>
+                <button name="submit"
+                        type="submit"
+                        class="px-10 py-4 bg-pink-500 hover:bg-pink-800 text-white font-semibold rounded">
+                    Update course
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

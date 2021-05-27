@@ -1,29 +1,28 @@
 ﻿@page
 @model SchoolProject2.Areas.Admin.Pages.IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+@inject UserManager<IdentityUser> UserManager
 
-
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h1 class="text-info">Admin Zone</h1>
-        </div>
+<div class="container space-y-16">
+    <div>
+        <h1 class="text-3xl font-bold">Hello @User.Identity.Name 👋🏼</h1>
+        <p class="text-gray-600 text-xl">How are you today?</p>
     </div>
-    <div class="row">
-        <div class="col-2 mx-2">
-            <a asp-page="AllStudents" class="btn btn-success">Show All Students</a>
-        </div>
 
-        <div class="col-2">
-            <a asp-page="CreateStudent" class="btn btn-success">Create New Student</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-2 mx-2">
-            <a asp-page="AllTeachers" class="btn btn-primary">Show All Teachers</a>
-        </div>
-
-        <div class="col-2">
-            <a asp-page="CreateTeacher" class="btn btn-primary">Create New Teacher</a>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a asp-area="Admin" asp-page="AllCourses" class="w-full shadow-lg border border-gray-100 rounded px-5 py-8 space-y-5 transform hover:-translate-y-2 transition duration-300">
+            <p class="text-6xl font-black text-gray-900 text-center">@Model.Courses.Count()</p>
+            <p class="text-gray-800 text-lg text-center font-medium">You have total courses</p>
+        </a>
+        <a asp-area="Admin" asp-page="AllStudents" class="w-full shadow-lg border border-gray-100 rounded px-5 py-8 space-y-5 transform hover:-translate-y-2 transition duration-300">
+            <p class="text-6xl font-black text-gray-900 text-center">@Model.Students.Count()</p>
+            <p class="text-gray-800 text-lg text-center font-medium">You have total students</p>
+        </a>
+        <a asp-area="Admin" asp-page="AllTeachers" class="w-full shadow-lg border border-gray-100 rounded px-5 py-8 space-y-5 transform hover:-translate-y-2 transition duration-300">
+            <p class="text-6xl font-black text-gray-900 text-center">@Model.Teachers.Count()</p>
+            <p class="text-gray-800 text-lg text-center font-medium">You have total teachers</p>
+        </a>
     </div>
 </div>

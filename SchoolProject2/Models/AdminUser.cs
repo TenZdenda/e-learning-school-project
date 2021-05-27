@@ -14,11 +14,11 @@ namespace SchoolProject2.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [MaxLength(100)]
-        public string RoadNameAndNumber { get; set; }
+        //[MaxLength(100)]
+        //public string RoadNameAndNumber { get; set; }
 
-        [MaxLength(100)]
-        public string AreaCodeAndTown { get; set; }
+        //[MaxLength(100)]
+        //public string AreaCodeAndTown { get; set; }
         
         //public int TestId { get; set; }
         //[ForeignKey(nameof(TestId))]

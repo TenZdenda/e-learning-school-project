@@ -2,17 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SchoolProject2.Data;
 using SchoolProject2.Data.Repository;
 using SchoolProject2.Models;
+using SchoolProject2.Utility;
 
 namespace SchoolProject2.Areas.Admin.Pages
 {
+    [Authorize(Roles = SD.AdminUser)]
     public class AllStudentsModel : PageModel
     {
         private readonly IAdminService _db;
+
         public IEnumerable<StudentUser> Students { get; set; }
 
         public AllStudentsModel(IAdminService db)
@@ -20,9 +25,27 @@ namespace SchoolProject2.Areas.Admin.Pages
             _db = db;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            Students = _db.GetAllStudents();
+            Students = await _db.GetAllStudents();
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync(string id)
+        {
+            var result = await _db.DeleteStudent(id);
+
+            if (result)
+               TempData["SM"] = $"Student has been successfully deleted";
+            else
+                TempData["FM"] = $"Student has been failed to delete";
+
+            if (result)
+            {
+                Students = await _db.GetAllStudents();
+                return Page();
+            }
+            return Page();
         }
     }
 }

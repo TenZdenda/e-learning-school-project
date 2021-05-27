@@ -16,18 +16,18 @@ namespace SchoolProject2.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("CourseStudentUser", b =>
                 {
-                    b.Property<int>("CoursesId")
+                    b.Property<int>("CoursesCourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("StudentUsersId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CoursesId", "StudentUsersId");
+                    b.HasKey("CoursesCourseId", "StudentUsersId");
 
                     b.HasIndex("StudentUsersId");
 
@@ -183,12 +183,10 @@ namespace SchoolProject2.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -225,12 +223,10 @@ namespace SchoolProject2.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -242,7 +238,7 @@ namespace SchoolProject2.Migrations
 
             modelBuilder.Entity("SchoolProject2.Models.Course", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CourseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -252,27 +248,72 @@ namespace SchoolProject2.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TeacherUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CourseId");
+
+                    b.HasIndex("TeacherUserId");
 
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("SchoolProject2.Models.Event", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("SchoolProject2.Models.Schedule", b =>
+                {
+                    b.Property<int>("ScheduleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ScheduleId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Schedules");
                 });
 
             modelBuilder.Entity("SchoolProject2.Models.AdminUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("AreaCodeAndTown")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("RoadNameAndNumber")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.HasDiscriminator().HasValue("AdminUser");
                 });
@@ -280,9 +321,6 @@ namespace SchoolProject2.Migrations
             modelBuilder.Entity("SchoolProject2.Models.StudentUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -297,21 +335,11 @@ namespace SchoolProject2.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("AreaCodeAndTown")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("TeacherUser_AreaCodeAndTown");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("TeacherUser_Name");
-
-                    b.Property<string>("RoadNameAndNumber")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("TeacherUser_RoadNameAndNumber");
 
                     b.HasDiscriminator().HasValue("TeacherUser");
                 });
@@ -320,7 +348,7 @@ namespace SchoolProject2.Migrations
                 {
                     b.HasOne("SchoolProject2.Models.Course", null)
                         .WithMany()
-                        .HasForeignKey("CoursesId")
+                        .HasForeignKey("CoursesCourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -380,6 +408,29 @@ namespace SchoolProject2.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SchoolProject2.Models.Course", b =>
+                {
+                    b.HasOne("SchoolProject2.Models.TeacherUser", "TeacherUser")
+                        .WithMany()
+                        .HasForeignKey("TeacherUserId");
+
+                    b.Navigation("TeacherUser");
+                });
+
+            modelBuilder.Entity("SchoolProject2.Models.Schedule", b =>
+                {
+                    b.HasOne("SchoolProject2.Models.Course", "Course")
+                        .WithMany("Schedules")
+                        .HasForeignKey("CourseId");
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("SchoolProject2.Models.Course", b =>
+                {
+                    b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,25 +2,19 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
+<a class="hidden lg:block">|</a>
+
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
+        <button type="submit" class="lg:inline-flex lg:w-auto w-full px-7 py-2 rounded text-black items-center justify-center hover:bg-gray-100">
+            Log out
+        </button>
+    </form>
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
+    <a asp-area="Identity" asp-page="/Account/Register" class="lg:inline-flex lg:w-auto w-full px-7 py-2 rounded text-black items-center justify-center hover:bg-gray-100">Register</a>
+
+    <a asp-area="Identity" asp-page="/Account/Login" class="lg:inline-flex lg:w-auto w-full px-7 py-2 rounded text-black items-center justify-center text-white bg-purple-400 hover:bg-purple-600">Login</a>
 }
-</ul>

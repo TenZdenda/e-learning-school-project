@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 using SchoolProject2.Data;
 using SchoolProject2.Data.EFRepository;
 using SchoolProject2.Data.Repository;
+using SchoolProject2.Models;
+using SchoolProject2.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,12 +38,22 @@ namespace SchoolProject2
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
+            
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //services.AddSingleton<IEmailSender>();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //   .AddRoles<IdentityRole>()
+            //   .AddDefaultTokenProviders()
+            //   .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddRazorPages();
             services.AddScoped<IAdminService, EFAdminService>();
+            services.AddScoped<IStudentService, EFStudentService>();
+            services.AddScoped<ITeacherService, EFTeacherService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

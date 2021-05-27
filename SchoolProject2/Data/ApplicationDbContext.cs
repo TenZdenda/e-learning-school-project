@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SchoolProject2.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext 
     {
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -18,5 +18,7 @@ namespace SchoolProject2.Data
         public DbSet<StudentUser> StudentUsers { get; set; }
         public DbSet<TeacherUser> TeacherUsers { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
     }
 }
