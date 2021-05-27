@@ -20,7 +20,7 @@ namespace SchoolProject2_UnitTest.xUnitTestsOfStudents
             
         }
 
-       // [Fact]
+       //[Fact]
         public async void Add_Student_Test()
         {
             using (var context = new ApplicationDbContext(ContextOptions))
