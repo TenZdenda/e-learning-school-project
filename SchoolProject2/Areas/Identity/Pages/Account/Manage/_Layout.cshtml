@@ -91,9 +91,25 @@
                             <h1 class="text-3xl font-bold">Manage your account</h1>
                         </div>
                         <div>
-                            <a asp-area="Admin" asp-page="/Index" class="bg-black hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded mx-auto md:mx-0 my-4 md:my-0 block focus:outline-none text-center">
-                                Back to admin panel
-                            </a>
+                            @if (User.IsInRole(SD.AdminUser))
+                            {
+                                <a asp-area="Admin" asp-page="/Index" class="bg-black hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded mx-auto md:mx-0 my-4 md:my-0 block focus:outline-none text-center">
+                                    Back to admin panel
+                                </a>
+                            }
+                            @if (User.IsInRole(SD.StudentUser))
+                            {
+                                <a asp-area="Student" asp-page="/Index" class="bg-black hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded mx-auto md:mx-0 my-4 md:my-0 block focus:outline-none text-center">
+                                    Back to student panel
+                                </a>
+                            }
+                            @if (User.IsInRole(SD.TeacherUser))
+                            {
+                                <a asp-area="Teacher" asp-page="/Index" class="bg-black hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded mx-auto md:mx-0 my-4 md:my-0 block focus:outline-none text-center">
+                                    Back to teacher panel
+                                </a>
+                            }
+
                         </div>
                     </div>
                     @RenderBody()

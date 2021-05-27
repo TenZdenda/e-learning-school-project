@@ -1,8 +1,24 @@
 ﻿@page
 @model SchoolProject2.Areas.Teacher.Pages.IndexModel
 @{
+    ViewData["Title"] = "Dashboard";
 }
+@inject UserManager<IdentityUser> UserManager
 
-<div>
-    <p>Hello</p>
+<div class="container space-y-16">
+    <div>
+        <h1 class="text-3xl font-bold">Hello @User.Identity.Name 👋🏼</h1>
+        <p class="text-gray-600 text-xl">How are you today?</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a asp-area="Teacher" asp-page="AllCourses" class="w-full shadow-lg border border-gray-100 rounded px-5 py-8 space-y-5 transform hover:-translate-y-2 transition duration-300">
+            <p class="text-6xl font-black text-gray-900 text-center">@Model.Courses.Count()</p>
+            <p class="text-gray-800 text-lg text-center font-medium">You have total courses</p>
+        </a>
+        <a asp-area="Teacher" asp-page="AllSchedules" class="w-full shadow-lg border border-gray-100 rounded px-5 py-8 space-y-5 transform hover:-translate-y-2 transition duration-300">
+            <p class="text-6xl font-black text-gray-900 text-center">@Model.Schedules.Count()</p>
+            <p class="text-gray-800 text-lg text-center font-medium">You have total schedules</p>
+        </a>
+    </div>
 </div>
