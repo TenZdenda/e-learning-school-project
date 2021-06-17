@@ -21,13 +21,13 @@
                 <a asp-page="/Index" class="text-2xl font-bold">DanlabSchool</a>
             </div>
 
-            <button class="text-black inline-flex p-3 hover:bg-gray-700 rounded ml-auto hover:text-white outline-none nav-toggler lg:hidden" data-target="#navigation">
+            <button class="text-black inline-flex p-3 hover:bg-gray-700 rounded ml-auto hover:text-white outline-none nav-toggler lg:hidden focus:outline-none" id="menuBtn" onclick="openMobileMenu();" data-target="#navigation">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
                 </svg>
             </button>
 
-            <div class="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto" id="navigation">
+            <div class="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto transition duration-300" id="navigation">
                 <div class="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start flex flex-col lg:h-auto lg:space-x-2">
                     <a asp-area="" asp-page="/Index" class="lg:inline-flex lg:w-auto w-full px-7 py-2 rounded text-black items-center justify-center hover:bg-gray-100">
                         <span>Home</span>
@@ -133,7 +133,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/mobile-menu.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
