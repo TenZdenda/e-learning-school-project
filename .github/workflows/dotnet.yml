@@ -21,5 +21,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Tests
+      run: |
+          dotnet test --filter SchedulesUnitTest --no-build --verbosity normal
+          dotnet test --filter CoursesUnitTest --no-build --verbosity normal
